@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowFreeSolver", "FlowFreeSolver\FlowFreeSolver.csproj", "{BFBDBA92-A54A-4AF2-BDD9-3B2E76EFEE47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowFreeSolverTests", "FlowFreeSolverTests\FlowFreeSolverTests.csproj", "{624B1E7D-84DA-4E25-A8D2-13A0DCAD6E43}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{BFBDBA92-A54A-4AF2-BDD9-3B2E76EFEE47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFBDBA92-A54A-4AF2-BDD9-3B2E76EFEE47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFBDBA92-A54A-4AF2-BDD9-3B2E76EFEE47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{624B1E7D-84DA-4E25-A8D2-13A0DCAD6E43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{624B1E7D-84DA-4E25-A8D2-13A0DCAD6E43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{624B1E7D-84DA-4E25-A8D2-13A0DCAD6E43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{624B1E7D-84DA-4E25-A8D2-13A0DCAD6E43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
