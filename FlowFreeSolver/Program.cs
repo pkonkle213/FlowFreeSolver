@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace FlowSolver
 {
-    internal class Program
+    public class Program
     {
         private static List<List<int>> startBoard1 = new List<List<int>>()
         {
@@ -47,7 +47,7 @@ namespace FlowSolver
             }
         }
 
-        private static List<List<int>> CopyBoard(List<List<int>> board)
+        public static List<List<int>> CopyBoard(List<List<int>> board)
         {
             List<List<int>> newBoard = new List<List<int>>();
             for (int row = 0; row < board.Count; row++)
@@ -64,7 +64,7 @@ namespace FlowSolver
             return newBoard;
         }
 
-        private static void PrintBoard(List<List<int>> board)
+        public static void PrintBoard(List<List<int>> board)
         {
             for (int row = 0; row < board.Count; row++)
             {
