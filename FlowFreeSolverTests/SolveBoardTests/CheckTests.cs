@@ -72,6 +72,24 @@ namespace FlowFreeSolverTests.SolveBoardTests
                     new List<int>() { 0, 1, 4, 5, 0 },
             };
 
+        List<List<int>> _testBoard6 = new List<List<int>>()
+            {
+                    new List<int>() { 1, 1, 2, 2, 3 }, // This should error midway check due to 4 not being a starter and having 1 adjacent value OR 3 being a starter and not having an adjacent value
+                    new List<int>() { 1, 0, 4, 0, 5 },
+                    new List<int>() { 0, 0, 0, 0, 0 },
+                    new List<int>() { 0, 2, 0, 3, 0 },
+                    new List<int>() { 0, 1, 4, 5, 0 },
+            };
+
+        List<List<int>> _testBoard7 = new List<List<int>>()
+            {
+                    new List<int>() { 1, 1, 2, 2, 3 },
+                    new List<int>() { 1, 4, 4, 5, 5 },
+                    new List<int>() { 1, 4, 4, 5, 5 },
+                    new List<int>() { 2, 2, 4, 3, 5 },
+                    new List<int>() { 2, 1, 4, 5, 5 },
+            };
+
         [TestMethod]
         public void MidWayCheckReturnsTrueIfNoErrorsFound()
         {
@@ -103,29 +121,37 @@ namespace FlowFreeSolverTests.SolveBoardTests
         {
             bool actual1 = _solver.FinalCheck(_testBoard1, _startBoard);
             bool actual2 = _solver.FinalCheck(_testBoard2, _startBoard);
+            bool actual7 = _solver.FinalCheck(_testBoard7, _startBoard);
 
             Assert.IsFalse(actual1);
             Assert.IsFalse(actual2);
+            Assert.IsFalse(actual7);
         }
 
         [TestMethod]
         public void DoubleCheckBoardReturnsTrueIfNoErrorsFound()
         {
-            bool midWay1 = _solver.DoubleCheckBoard(_testBoard, 2, 4, _startBoard);
-            bool midWay2 = _solver.DoubleCheckBoard(_testBoard, 4, 4, _startBoard);
+            bool midWay1 = _solver.DoubleCheckBoard(_testBoard, 5, 2, 4, _startBoard);
+            bool final1 = _solver.DoubleCheckBoard(_testBoard, 5, 4, 4, _startBoard);
 
             Assert.IsTrue(midWay1);
-            Assert.IsTrue(midWay2);
+            Assert.IsTrue(final1);
         }
 
         [TestMethod]
         public void DoubleCheckBoardReturnsFalseIfErrorFound()
         {
-            bool midWay1 = _solver.DoubleCheckBoard(_testBoard1, 2, 2, _startBoard);
-            bool final1 = _solver.DoubleCheckBoard(_testBoard1, 4, 4, _startBoard);
+            bool midWay1 = _solver.DoubleCheckBoard(_testBoard1, 1, 2, 2, _startBoard);
+            bool final1 = _solver.DoubleCheckBoard(_testBoard1, 4, 4, 4, _startBoard);
 
             Assert.IsFalse(midWay1);
             Assert.IsFalse(final1);
+
+            bool midWay2 = _solver.DoubleCheckBoard(_testBoard6, 4, 2, 2, _startBoard);
+            bool final2 = _solver.DoubleCheckBoard(_testBoard6, 4, 4, 4, _startBoard);
+
+            Assert.IsFalse(midWay2);
+            Assert.IsFalse(final2);
         }
     }
 }

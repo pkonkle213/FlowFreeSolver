@@ -12,6 +12,8 @@ namespace FlowFreeSolver
             {
                 for (int column = 0; column < board[0].Count; column++)
                 {
+                    bool iTried = false;
+
                     if (board[row][column] == 0)
                     {
                         for (int colorTry = 1; colorTry <= maxColor; colorTry++)
@@ -19,6 +21,7 @@ namespace FlowFreeSolver
                             if (isValidPlacement(board, colorTry, row, column, startBoard))
                             {
                                 board[row][column] = colorTry;
+                                iTried = true;
 
                                 if (isBoardSolved(board, startBoard, maxColor))
                                 {
@@ -31,7 +34,10 @@ namespace FlowFreeSolver
                             }
                         }
 
-                        return false;
+                        if (iTried)
+                        {
+                           return false;
+                        }
                     }
                 }
             }
@@ -41,7 +47,7 @@ namespace FlowFreeSolver
 
         public bool isValidPlacement(List<List<int>> board, int colorTry, int row, int column, List<List<int>> startBoard)
         {
-            return (MatchingAdjacentTiles(board, colorTry, row, column) < 3 && DoubleCheckBoard(board, row, column, startBoard));
+            return (MatchingAdjacentTiles(board, colorTry, row, column) > 0 && DoubleCheckBoard(board, colorTry, row, column, startBoard));
         }
 
         public int MatchingAdjacentTiles(List<List<int>> board, int color, int row, int column)
@@ -131,8 +137,10 @@ namespace FlowFreeSolver
             return false;
         }
 
-        public bool DoubleCheckBoard(List<List<int>> board, int testRow, int testColumn, List<List<int>> startBoard)
+        public bool DoubleCheckBoard(List<List<int>> board, int colorTest, int testRow, int testColumn, List<List<int>> startBoard)
         {
+            board[testRow][testColumn] = colorTest;
+
             if (testRow == board.Count - 1 && testColumn == board[0].Count - 1)
             {
                 return FinalCheck(board, startBoard);

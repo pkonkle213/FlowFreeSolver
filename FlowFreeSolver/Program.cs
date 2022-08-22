@@ -17,13 +17,12 @@ namespace FlowFreeSolver
             SolveBoard solver = new SolveBoard();
             NewBoard _makeBoard = new NewBoard();
 
-            //List<List<int>> newBoard = CopyBoard(_startBoard);
-            List<List<int>> startBoard = _makeBoard.MakeNewBoard();
-            List<List<int>> newBoard = CopyBoard(startBoard);
+            //List<List<int>> startBoard = _makeBoard.MakeNewBoard();
+            List<List<int>> newBoard = CopyBoard(_startBoard);
 
             maxColor = newBoard.Max(row => row.Max());
 
-            if (solver.isBoardSolved(newBoard, startBoard, maxColor))
+            if (solver.isBoardSolved(newBoard, _startBoard, maxColor))
             {
                 PrintBoard(newBoard);
                 Console.WriteLine("Solved!");
