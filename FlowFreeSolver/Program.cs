@@ -1,37 +1,24 @@
-﻿using System;
+﻿using FlowFreeSolver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FlowSolver
+namespace FlowFreeSolver
 {
     public class Program
     {
-        private static List<List<int>> startBoard1 = new List<List<int>>()
-        {
-                    new List<int>() { 1, 0, 2, 0, 3 },
-                    new List<int>() { 0, 0, 4, 0, 5 },
-                    new List<int>() { 0, 0, 0, 0, 0 },
-                    new List<int>() { 0, 2, 0, 3, 0 },
-                    new List<int>() { 0, 1, 4, 5, 0 },
-        };
-
-        private static List<List<int>> startBoard2 = new List<List<int>>()
-        {
-                    new List<int>() { 1, 0, 0, 0, 4 },
-                    new List<int>() { 0, 0, 0, 0, 0 },
-                    new List<int>() { 0, 3, 2, 0, 0 },
-                    new List<int>() { 0, 0, 1, 0, 0 },
-                    new List<int>() { 2, 3, 4, 0, 0 },
-        };
-
-        private static List<List<int>> startBoard = startBoard1;
+        private static PreMadeBoards _preMadeBoards = new PreMadeBoards();
+        private static List<List<int>> _startBoard = _preMadeBoards.board1;
 
         private static int maxColor;
 
         static void Main()
         {
             SolveBoard solver = new SolveBoard();
+            NewBoard _makeBoard = new NewBoard();
 
+            //List<List<int>> newBoard = CopyBoard(_startBoard);
+            List<List<int>> startBoard = _makeBoard.MakeNewBoard();
             List<List<int>> newBoard = CopyBoard(startBoard);
 
             maxColor = newBoard.Max(row => row.Max());

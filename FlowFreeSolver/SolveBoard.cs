@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace FlowSolver
+namespace FlowFreeSolver
 {
     public class SolveBoard
     {
@@ -16,11 +16,11 @@ namespace FlowSolver
                     {
                         for (int colorTry = 1; colorTry <= maxColor; colorTry++)
                         {
-                            if (MatchingAdjacentTiles(board, colorTry, row, column) > 0)
+                            if (isValidPlacement(board, colorTry, row, column, startBoard))
                             {
                                 board[row][column] = colorTry;
 
-                                if (DoubleCheckBoard(board, row, column, startBoard) && isBoardSolved(board, startBoard, maxColor))
+                                if (isBoardSolved(board, startBoard, maxColor))
                                 {
                                     return true;
                                 }
@@ -37,6 +37,11 @@ namespace FlowSolver
             }
 
             return true;
+        }
+
+        public bool isValidPlacement(List<List<int>> board, int colorTry, int row, int column, List<List<int>> startBoard)
+        {
+            return (MatchingAdjacentTiles(board, colorTry, row, column) < 3 && DoubleCheckBoard(board, row, column, startBoard));
         }
 
         public int MatchingAdjacentTiles(List<List<int>> board, int color, int row, int column)
