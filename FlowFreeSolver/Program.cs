@@ -10,19 +10,19 @@ namespace FlowFreeSolver
         private static PreMadeBoards _preMadeBoards = new PreMadeBoards();
         private static List<List<int>> _startBoard = _preMadeBoards.board1;
 
-        private static int maxColor;
+        private static int _maxColor;
 
         static void Main()
         {
-            SolveBoard solver = new SolveBoard();
             NewBoard _makeBoard = new NewBoard();
 
             //List<List<int>> startBoard = _makeBoard.MakeNewBoard();
             List<List<int>> newBoard = CopyBoard(_startBoard);
 
-            maxColor = newBoard.Max(row => row.Max());
+            _maxColor = newBoard.Max(row => row.Max());
+            SolveBoard solver = new SolveBoard(_maxColor, _startBoard);
 
-            if (solver.isBoardSolved(newBoard, _startBoard, maxColor))
+            if (solver.isBoardSolved(newBoard))
             {
                 PrintBoard(newBoard);
                 Console.WriteLine("Solved!");

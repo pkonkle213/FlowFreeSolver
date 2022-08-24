@@ -1,13 +1,14 @@
 using FlowFreeSolver;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FlowFreeSolverTests.SolveBoardTests
 {
     [TestClass]
     public class CheckTests
     {
-        SolveBoard _solver = new SolveBoard();
+        private int _maxColor;
 
         List<List<int>> _startBoard = new List<List<int>>()
             {
@@ -18,12 +19,21 @@ namespace FlowFreeSolverTests.SolveBoardTests
                     new List<int>() { 0, 1, 4, 5, 0 },
             };
 
-        List<List<int>> _testBoard = new List<List<int>>()
+        List<List<int>> _answerBoard = new List<List<int>>()
             {
                     new List<int>() { 1, 2, 2, 3, 3 },
                     new List<int>() { 1, 2, 4, 3, 5 },
                     new List<int>() { 1, 2, 4, 3, 5 },
                     new List<int>() { 1, 2, 4, 3, 5 },
+                    new List<int>() { 1, 1, 4, 5, 5 },
+            };
+
+        List<List<int>> _testBoard = new List<List<int>>()
+            {
+                    new List<int>() { 1, 2, 2, 3, 3 },
+                    new List<int>() { 1, 2, 4, 3, 5 },
+                    new List<int>() { 1, 2, 4, 3, 5 },
+                    new List<int>() { 1, 2, 4, 3, 0 },
                     new List<int>() { 1, 1, 4, 5, 5 },
             };
 
@@ -83,75 +93,40 @@ namespace FlowFreeSolverTests.SolveBoardTests
 
         List<List<int>> _testBoard7 = new List<List<int>>()
             {
-                    new List<int>() { 1, 1, 2, 2, 3 },
+                    new List<int>() { 1, 2, 2, 3, 3 },
+                    new List<int>() { 1, 2, 4, 3, 5 },
                     new List<int>() { 1, 4, 4, 5, 5 },
-                    new List<int>() { 1, 4, 4, 5, 5 },
-                    new List<int>() { 2, 2, 4, 3, 5 },
-                    new List<int>() { 2, 1, 4, 5, 5 },
+                    new List<int>() { 1, 2, 2, 3, 3 },
+                    new List<int>() { 1, 1, 4, 5, 3 },
             };
 
         [TestMethod]
-        public void MidWayCheckReturnsTrueIfNoErrorsFound()
+        public void DoubleCheckReturnsTrueIfNoErrorsFound()
         {
-            bool actual = _solver.MidWayCheck(_testBoard, 2, 2, _startBoard);
+            _maxColor = _startBoard.Max(row => row.Max());
+            SolveBoard solver = new SolveBoard(_maxColor, _startBoard);
+            bool actual = solver.DoubleCheckBoardIsValid(_answerBoard);
 
             Assert.IsTrue(actual);
         }
 
         [TestMethod]
-        public void MidWayCheckReturnsFalseIfErrorFound()
+        public void DoubleCheckReturnsFalseIfErrorFound()
         {
-            bool actual1 = _solver.MidWayCheck(_testBoard1, 2, 0, _startBoard);
-            bool actual2 = _solver.MidWayCheck(_testBoard2, 4, 3, _startBoard);
+            _maxColor = _startBoard.Max(row => row.Max());
 
-            Assert.IsFalse(actual1);
-            Assert.IsFalse(actual2);
-        }
+            SolveBoard solver1 = new SolveBoard(_maxColor, _startBoard);
+            bool actual1 = solver1.DoubleCheckBoardIsValid(_testBoard1);
 
-        [TestMethod]
-        public void FinalCheckReturnsTrueIfNoErrorsFound()
-        {
-            bool actual = _solver.FinalCheck(_testBoard, _startBoard);
+            SolveBoard solver2 = new SolveBoard(_maxColor, _startBoard);
+            bool actual2 = solver2.DoubleCheckBoardIsValid(_testBoard2);
 
-            Assert.IsTrue(actual);
-        }
-
-        [TestMethod]
-        public void FinalCheckReturnsFalseIfErrorFound()
-        {
-            bool actual1 = _solver.FinalCheck(_testBoard1, _startBoard);
-            bool actual2 = _solver.FinalCheck(_testBoard2, _startBoard);
-            bool actual7 = _solver.FinalCheck(_testBoard7, _startBoard);
+            SolveBoard solver3 = new SolveBoard(_maxColor, _startBoard);
+            bool actual7 = solver3.DoubleCheckBoardIsValid(_testBoard7);
 
             Assert.IsFalse(actual1);
             Assert.IsFalse(actual2);
             Assert.IsFalse(actual7);
-        }
-
-        [TestMethod]
-        public void DoubleCheckBoardReturnsTrueIfNoErrorsFound()
-        {
-            bool midWay1 = _solver.DoubleCheckBoard(_testBoard, 5, 2, 4, _startBoard);
-            bool final1 = _solver.DoubleCheckBoard(_testBoard, 5, 4, 4, _startBoard);
-
-            Assert.IsTrue(midWay1);
-            Assert.IsTrue(final1);
-        }
-
-        [TestMethod]
-        public void DoubleCheckBoardReturnsFalseIfErrorFound()
-        {
-            bool midWay1 = _solver.DoubleCheckBoard(_testBoard1, 1, 2, 2, _startBoard);
-            bool final1 = _solver.DoubleCheckBoard(_testBoard1, 4, 4, 4, _startBoard);
-
-            Assert.IsFalse(midWay1);
-            Assert.IsFalse(final1);
-
-            bool midWay2 = _solver.DoubleCheckBoard(_testBoard6, 4, 2, 2, _startBoard);
-            bool final2 = _solver.DoubleCheckBoard(_testBoard6, 4, 4, 4, _startBoard);
-
-            Assert.IsFalse(midWay2);
-            Assert.IsFalse(final2);
         }
     }
 }

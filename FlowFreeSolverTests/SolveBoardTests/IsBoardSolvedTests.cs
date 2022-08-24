@@ -8,8 +8,8 @@ namespace FlowFreeSolverTests.SolveBoardTests
     [TestClass]
     public class IsBoardSolvedTests
     {
-        SolveBoard _solver = new SolveBoard();
-        PreMadeBoards _boards = new PreMadeBoards();
+        private int _maxColor;
+        private PreMadeBoards _boards = new PreMadeBoards();
 
         List<List<int>> _startBoard = new List<List<int>>()
             {
@@ -22,16 +22,16 @@ namespace FlowFreeSolverTests.SolveBoardTests
 
         List<List<int>> _testBoard1 = new List<List<int>>()
             {
-                    new List<int>() { 1, 1, 2, 2, 3 }, // This should error midway check due to 4 not being a starter and having 1 adjacent value OR 3 being a starter and not having an adjacent value
-                    new List<int>() { 0, 0, 4, 0, 5 },
-                    new List<int>() { 0, 0, 0, 0, 0 },
+                    new List<int>() { 1, 1, 2, 2, 3 },
+                    new List<int>() { 0, 1, 4, 0, 5 },
+                    new List<int>() { 1, 0, 1, 0, 0 },
                     new List<int>() { 0, 2, 0, 3, 0 },
                     new List<int>() { 0, 1, 4, 5, 0 },
             };
 
         List<List<int>> _testBoard2 = new List<List<int>>()
             {
-                    new List<int>() { 1, 2, 2, 3, 3 }, // This should error midway check due to 4 not being a starter and having 1 adjacent value OR 3 being a starter and not having an adjacent value
+                    new List<int>() { 1, 2, 2, 3, 3 },
                     new List<int>() { 1, 0, 4, 0, 5 },
                     new List<int>() { 0, 0, 0, 0, 0 },
                     new List<int>() { 0, 2, 0, 3, 0 },
@@ -41,33 +41,46 @@ namespace FlowFreeSolverTests.SolveBoardTests
         [TestMethod]
         public void isValidPlacementReturnsTrueForValidPlacement()
         {
-            bool actual1 = _solver.isValidPlacement(_testBoard2, 2, 1, 1, _startBoard);
+            _maxColor = _startBoard.Max(row => row.Max());
+            SolveBoard solver = new SolveBoard(_maxColor, _startBoard);
+
+            bool actual1 = solver.isValidPlacement(_testBoard2, 2, 1, 1);
             Assert.IsTrue(actual1);
+            
         }
 
         [TestMethod]
         public void isValidPlacementReturnsFalseForInvalidPlacement()
         {
-            bool actual1 = _solver.isValidPlacement(_testBoard1, 1, 1, 0, _startBoard);
+            _maxColor = _startBoard.Max(row => row.Max());
+            SolveBoard solver = new SolveBoard(_maxColor, _startBoard);
+
+            bool actual1 = solver.isValidPlacement(_testBoard1, 1, 2, 1);
+            bool actual2 = solver.isValidPlacement(_testBoard1, 1, 2, 4);
+            
             Assert.IsFalse(actual1);
+            Assert.IsFalse(actual2);
         }
 
         [TestMethod]
         public void isBoardSolvesReturnsTrueForSolvableBoards()
         {
             int maxColor1 = _boards.board1.Max(row => row.Max());
+            SolveBoard solver1 = new SolveBoard(maxColor1, _boards.board1);
             List<List<int>> cloneBoard1 = Program.CopyBoard(_boards.board1);
-            bool actual1 = _solver.isBoardSolved(_boards.board1, cloneBoard1, maxColor1);
+            bool actual1 = solver1.isBoardSolved(cloneBoard1);
             Assert.IsTrue(actual1);
 
             int maxColor2 = _boards.board2.Max(row => row.Max());
+            SolveBoard solver2 = new SolveBoard(maxColor2, _boards.board2);
             List<List<int>> cloneBoard2 = Program.CopyBoard(_boards.board2);
-            bool actual2 = _solver.isBoardSolved(_boards.board2, cloneBoard2, maxColor2);
+            bool actual2 = solver2.isBoardSolved(cloneBoard2);
             Assert.IsTrue(actual2);
 
             int maxColor3 = _boards.board3.Max(row => row.Max());
+            SolveBoard solver3 = new SolveBoard(maxColor3, _boards.board3);
             List<List<int>> cloneBoard3 = Program.CopyBoard(_boards.board3);
-            bool actual3 = _solver.isBoardSolved(_boards.board3, cloneBoard3, maxColor3);
+            bool actual3 = solver3.isBoardSolved(cloneBoard3);
             Assert.IsTrue(actual3);
         }
     }

@@ -1,29 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace FlowFreeSolver
 {
     public class SolveBoard
     {
-        public bool isBoardSolved(List<List<int>> board, List<List<int>> startBoard, int maxColor)
+        private int _maxColor;
+        private List<List<int>> _startBoard;
+        private static int _attempts = 0;
+
+        public SolveBoard(int maxColor, List<List<int>> startBoard)
+        {
+            _maxColor = maxColor;
+            _startBoard = startBoard;
+        }
+
+        public bool isBoardSolved(List<List<int>> board)
         {
             for (int row = 0; row < board.Count; row++)
             {
                 for (int column = 0; column < board[0].Count; column++)
                 {
-                    bool iTried = false;
-
                     if (board[row][column] == 0)
                     {
-                        for (int colorTry = 1; colorTry <= maxColor; colorTry++)
+                        for (int colorTry = 1; colorTry <= _maxColor; colorTry++)
                         {
-                            if (isValidPlacement(board, colorTry, row, column, startBoard))
+                            if (isValidPlacement(board, colorTry, row, column))
                             {
                                 board[row][column] = colorTry;
-                                iTried = true;
+                                _attempts++;
+                                PrintBoard(board);
 
-                                if (isBoardSolved(board, startBoard, maxColor))
+                                if (!DoubleCheckBoardIsValid(board))
+                                {
+                                    board[row][column] = 0;
+                                    return false;
+                                }
+
+                                if (isBoardSolved(board))
                                 {
                                     return true;
                                 }
@@ -33,11 +49,6 @@ namespace FlowFreeSolver
                                 }
                             }
                         }
-
-                        if (iTried)
-                        {
-                           return false;
-                        }
                     }
                 }
             }
@@ -45,12 +56,12 @@ namespace FlowFreeSolver
             return true;
         }
 
-        public bool isValidPlacement(List<List<int>> board, int colorTry, int row, int column, List<List<int>> startBoard)
+        public bool isValidPlacement(List<List<int>> board, int colorTry, int row, int column) // See later comment, may need to be in this validation
         {
-            return (MatchingAdjacentTiles(board, colorTry, row, column) > 0 && DoubleCheckBoard(board, colorTry, row, column, startBoard));
+            return (MatchingAdjacentTiles(board, colorTry, row, column) > 0 && MatchingAdjacentTiles(board, colorTry, row, column) < 3);
         }
 
-        public int MatchingAdjacentTiles(List<List<int>> board, int color, int row, int column)
+        public int MatchingAdjacentTiles(List<List<int>> board, int color, int row, int column) // Needs to also be used to find adjacent 0s. R0:12233, R1:11435 should error
         {
             int correct = 0;
 
@@ -137,34 +148,38 @@ namespace FlowFreeSolver
             return false;
         }
 
-        public bool DoubleCheckBoard(List<List<int>> board, int colorTest, int testRow, int testColumn, List<List<int>> startBoard)
-        {
-            board[testRow][testColumn] = colorTest;
-
-            if (testRow == board.Count - 1 && testColumn == board[0].Count - 1)
-            {
-                return FinalCheck(board, startBoard);
-            }
-            else
-            {
-                return MidWayCheck(board, testRow, testColumn, startBoard);
-            }
-        }
-
-        public bool FinalCheck(List<List<int>> board, List<List<int>> startBoard)
+        public bool DoubleCheckBoardIsValid(List<List<int>> board)
         {
             for (int row = 0; row < board.Count; row++)
             {
                 for (int column = 0; column < board[row].Count; column++)
                 {
-                    if (board[row][column] == startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) != 1)
+                    if (board[row][column] > 0)
                     {
-                        return false;
-                    }
+                        if (board.Min(row => row.Min()) > 0)
+                        {
+                            if (board[row][column] == _startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) != 1)
+                            {
+                                return false;
+                            }
 
-                    if (board[row][column] != startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) != 2)
-                    {
-                        return false;
+                            if (board[row][column] != _startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) != 2)
+                            {
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            if (board[row][column] == _startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) > 1)
+                            {
+                                return false;
+                            }
+
+                            if (MatchingAdjacentTiles(board, board[row][column], row, column) > 2)
+                            {
+                                return false;
+                            }
+                        }
                     }
                 }
             }
@@ -172,30 +187,26 @@ namespace FlowFreeSolver
             return true;
         }
 
-        public bool MidWayCheck(List<List<int>> board, int testRow, int testColumn, List<List<int>> startBoard)
+        public static void PrintBoard(List<List<int>> board)
         {
             for (int row = 0; row < board.Count; row++)
             {
-                for (int column = 0; column < board[row].Count; column++)
+                for (int column = 0; column < board[0].Count; column++)
                 {
-                    if (row == testRow && column == testColumn)
-                    {
-                        return true;
-                    }
-
-                    if (board[row][column] == startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) > 1)
-                    {
-                        return false;
-                    }
-
-                    if (board[row][column] > 0 && MatchingAdjacentTiles(board, board[row][column], row, column) > 2)
-                    {
-                        return false;
-                    }
+                    Console.Write(board[row][column]);
                 }
+
+                Console.WriteLine();
             }
 
-            return true;
+            for (int column = 0; column < board[0].Count; column++)
+            {
+                Console.Write("-");
+            }
+
+            Console.WriteLine(_attempts);
+
+            //Console.WriteLine();
         }
     }
 }
