@@ -44,7 +44,7 @@ namespace FlowFreeSolverTests.SolveBoardTests
             _maxColor = _startBoard.Max(row => row.Max());
             SolveBoard solver = new SolveBoard(_maxColor, _startBoard);
 
-            bool actual1 = solver.isValidPlacement(_testBoard2, 2, 1, 1);
+            bool actual1 = solver.IsValidPlacement(_testBoard2, 2, 1, 1);
             Assert.IsTrue(actual1);
             
         }
@@ -55,8 +55,8 @@ namespace FlowFreeSolverTests.SolveBoardTests
             _maxColor = _startBoard.Max(row => row.Max());
             SolveBoard solver = new SolveBoard(_maxColor, _startBoard);
 
-            bool actual1 = solver.isValidPlacement(_testBoard1, 1, 2, 1);
-            bool actual2 = solver.isValidPlacement(_testBoard1, 1, 2, 4);
+            bool actual1 = solver.IsValidPlacement(_testBoard1, 1, 2, 1);
+            bool actual2 = solver.IsValidPlacement(_testBoard1, 1, 2, 4);
             
             Assert.IsFalse(actual1);
             Assert.IsFalse(actual2);

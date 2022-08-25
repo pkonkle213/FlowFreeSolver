@@ -25,7 +25,7 @@ namespace FlowFreeSolverTests.SolveBoardTests
             _maxColor = _testBoard.Max(row => row.Max());
             SolveBoard solver = new SolveBoard(_maxColor, _testBoard);
 
-            bool actual = solver.isColorInBoxAbove(_testBoard, colorTry, row, column);
+            bool actual = solver.IsColorInBoxAbove(_testBoard, colorTry, row, column);
 
             Assert.IsTrue(actual);
         }
@@ -38,7 +38,7 @@ namespace FlowFreeSolverTests.SolveBoardTests
             _maxColor = _testBoard.Max(row => row.Max());
             SolveBoard solver = new SolveBoard(_maxColor, _testBoard);
 
-            bool actual = solver.isColorInBoxAbove(_testBoard, colorTry, row, column);
+            bool actual = solver.IsColorInBoxAbove(_testBoard, colorTry, row, column);
 
             Assert.IsFalse(actual);
         }
@@ -51,7 +51,7 @@ namespace FlowFreeSolverTests.SolveBoardTests
             _maxColor = _testBoard.Max(row => row.Max());
             SolveBoard solver = new SolveBoard(_maxColor, _testBoard);
 
-            bool actual = solver.isColorInBoxBelow(_testBoard, colorTry, row, column);
+            bool actual = solver.IsColorInBoxBelow(_testBoard, colorTry, row, column);
 
             Assert.IsTrue(actual);
         }
@@ -64,7 +64,7 @@ namespace FlowFreeSolverTests.SolveBoardTests
             _maxColor = _testBoard.Max(row => row.Max());
             SolveBoard solver = new SolveBoard(_maxColor, _testBoard);
 
-            bool actual = solver.isColorInBoxBelow(_testBoard, colorTry, row, column);
+            bool actual = solver.IsColorInBoxBelow(_testBoard, colorTry, row, column);
 
             Assert.IsFalse(actual);
         }
@@ -77,7 +77,7 @@ namespace FlowFreeSolverTests.SolveBoardTests
             _maxColor = _testBoard.Max(row => row.Max());
             SolveBoard solver = new SolveBoard(_maxColor, _testBoard);
 
-            bool actual = solver.isColorInBoxRight(_testBoard, colorTry, row, column);
+            bool actual = solver.IsColorInBoxRight(_testBoard, colorTry, row, column);
 
             Assert.IsTrue(actual);
         }
@@ -90,7 +90,7 @@ namespace FlowFreeSolverTests.SolveBoardTests
             _maxColor = _testBoard.Max(row => row.Max());
             SolveBoard solver = new SolveBoard(_maxColor, _testBoard);
 
-            bool actual = solver.isColorInBoxRight(_testBoard, colorTry, row, column);
+            bool actual = solver.IsColorInBoxRight(_testBoard, colorTry, row, column);
 
             Assert.IsFalse(actual);
         }
@@ -103,7 +103,7 @@ namespace FlowFreeSolverTests.SolveBoardTests
             _maxColor = _testBoard.Max(row => row.Max());
             SolveBoard solver = new SolveBoard(_maxColor, _testBoard);
 
-            bool actual = solver.isColorInBoxLeft(_testBoard, colorTry, row, column);
+            bool actual = solver.IsColorInBoxLeft(_testBoard, colorTry, row, column);
 
             Assert.IsTrue(actual);
         }
@@ -116,7 +116,7 @@ namespace FlowFreeSolverTests.SolveBoardTests
             _maxColor = _testBoard.Max(row => row.Max());
             SolveBoard solver = new SolveBoard(_maxColor, _testBoard);
 
-            bool actual = solver.isColorInBoxLeft(_testBoard, colorTry, row, column);
+            bool actual = solver.IsColorInBoxLeft(_testBoard, colorTry, row, column);
 
             Assert.IsFalse(actual);
         }

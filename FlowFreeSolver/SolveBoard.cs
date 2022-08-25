@@ -27,7 +27,7 @@ namespace FlowFreeSolver
                     {
                         for (int colorTry = 1; colorTry <= _maxColor; colorTry++)
                         {
-                            if (isValidPlacement(board, colorTry, row, column))
+                            if (IsValidPlacement(board, colorTry, row, column))
                             {
                                 board[row][column] = colorTry;
                                 _attempts++;
@@ -56,7 +56,7 @@ namespace FlowFreeSolver
             return true;
         }
 
-        public bool isValidPlacement(List<List<int>> board, int colorTry, int row, int column) // See later comment, may need to be in this validation
+        public bool IsValidPlacement(List<List<int>> board, int colorTry, int row, int column) // See later comment, may need to be in this validation
         {
             return (MatchingAdjacentTiles(board, colorTry, row, column) > 0 && MatchingAdjacentTiles(board, colorTry, row, column) < 3);
         }
@@ -65,22 +65,22 @@ namespace FlowFreeSolver
         {
             int correct = 0;
 
-            if (isColorInBoxAbove(board, color, row, column))
+            if (IsColorInBoxAbove(board, color, row, column))
             {
                 correct++;
             }
 
-            if (isColorInBoxBelow(board, color, row, column))
+            if (IsColorInBoxBelow(board, color, row, column))
             {
                 correct++;
             }
 
-            if (isColorInBoxLeft(board, color, row, column))
+            if (IsColorInBoxLeft(board, color, row, column))
             {
                 correct++;
             }
 
-            if (isColorInBoxRight(board, color, row, column))
+            if (IsColorInBoxRight(board, color, row, column))
             {
                 correct++;
             }
@@ -88,7 +88,7 @@ namespace FlowFreeSolver
             return correct;
         }
 
-        public bool isColorInBoxAbove(List<List<int>> board, int color, int row, int column)
+        public bool IsColorInBoxAbove(List<List<int>> board, int color, int row, int column)
         {
             if (row == 0)
             {
@@ -103,7 +103,7 @@ namespace FlowFreeSolver
             return false;
         }
 
-        public bool isColorInBoxLeft(List<List<int>> board, int color, int row, int column)
+        public bool IsColorInBoxLeft(List<List<int>> board, int color, int row, int column)
         {
             if (column == 0)
             {
@@ -118,7 +118,7 @@ namespace FlowFreeSolver
             return false;
         }
 
-        public bool isColorInBoxBelow(List<List<int>> board, int color, int row, int column)
+        public bool IsColorInBoxBelow(List<List<int>> board, int color, int row, int column)
         {
             if (row + 1 == board.Count)
             {
@@ -133,7 +133,7 @@ namespace FlowFreeSolver
             return false;
         }
 
-        public bool isColorInBoxRight(List<List<int>> board, int color, int row, int column)
+        public bool IsColorInBoxRight(List<List<int>> board, int color, int row, int column)
         {
             if (column + 1 == board[0].Count)
             {

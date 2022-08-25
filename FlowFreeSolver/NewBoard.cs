@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FlowFreeSolver
 {
-    public class NewBoard
+    public class NewBoard //This will only be viable as a console app. I plan on moving this to a web app to have a more dynamic set up
     {
         List<List<int>> board = new List<List<int>>();
         int _width;
@@ -63,7 +63,7 @@ namespace FlowFreeSolver
                 {
                     colorCount = colors.Count + 1;
                 }
-                catch
+                catch // haha I didn't realize I did this. I should definitely have it defined with an exception
                 {
                     colorCount = 1;
                 }
