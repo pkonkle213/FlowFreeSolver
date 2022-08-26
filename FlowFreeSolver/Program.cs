@@ -8,7 +8,7 @@ namespace FlowFreeSolver
     public class Program
     {
         private static PreMadeBoards _preMadeBoards = new PreMadeBoards();
-        private static List<List<int>> _startBoard = _preMadeBoards.board1;
+        private static List<List<int>> _startBoard = _preMadeBoards.board2;
 
         private static int _maxColor;
 
@@ -22,7 +22,7 @@ namespace FlowFreeSolver
             _maxColor = newBoard.Max(row => row.Max());
             SolveBoard solver = new SolveBoard(_maxColor, _startBoard);
 
-            if (solver.isBoardSolved(newBoard))
+            if (solver.IsBoardSolved(newBoard))
             {
                 PrintBoard(newBoard);
                 Console.WriteLine("Solved!");

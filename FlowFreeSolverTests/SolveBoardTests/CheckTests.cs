@@ -8,9 +8,10 @@ namespace FlowFreeSolverTests.SolveBoardTests
     [TestClass]
     public class CheckTests
     {
-        private int _maxColor;
+        private static int _maxColor;
+        SolveBoard _solver = new SolveBoard(_maxColor, _startBoard);
 
-        List<List<int>> _startBoard = new List<List<int>>()
+        static List<List<int>> _startBoard = new List<List<int>>()
             {
                     new List<int>() { 1, 0, 2, 0, 3 },
                     new List<int>() { 0, 0, 4, 0, 5 },
@@ -28,105 +29,74 @@ namespace FlowFreeSolverTests.SolveBoardTests
                     new List<int>() { 1, 1, 4, 5, 5 },
             };
 
-        List<List<int>> _testBoard = new List<List<int>>()
+        List<List<int>> _testBoard1 = new List<List<int>>() // Fails final check due to (2,0)
             {
                     new List<int>() { 1, 2, 2, 3, 3 },
+                    new List<int>() { 1, 1, 4, 3, 5 },
                     new List<int>() { 1, 2, 4, 3, 5 },
-                    new List<int>() { 1, 2, 4, 3, 5 },
-                    new List<int>() { 1, 2, 4, 3, 0 },
-                    new List<int>() { 1, 1, 4, 5, 5 },
-            };
-
-        List<List<int>> _testBoard1 = new List<List<int>>()
-            {
-                    new List<int>() { 1, 2, 2, 3, 3 },
-                    new List<int>() { 1, 1, 4, 3, 5 }, // This errors as the first 1 has 3 cells adjacent to it as the same color
-                    new List<int>() { 1, 2, 4, 3, 5 }, // Fails as of this one being submitted
                     new List<int>() { 1, 2, 4, 3, 5 },
                     new List<int>() { 1, 1, 4, 5, 5 },
             };
 
-        List<List<int>> _testBoard2 = new List<List<int>>()
+        List<List<int>> _testBoard2 = new List<List<int>>() // Passes midway check
             {
                     new List<int>() { 1, 2, 2, 3, 3 },
                     new List<int>() { 1, 2, 4, 3, 5 },
-                    new List<int>() { 1, 2, 4, 3, 5 },
-                    new List<int>() { 1, 2, 3, 3, 5 },
-                    new List<int>() { 1, 1, 4, 5, 5 }, // This errors as 4 is a starting point and doesn't have anything connected to it
-            };
-
-        List<List<int>> _testBoard3 = new List<List<int>>()
-            {
-                    new List<int>() { 1, 2, 2, 3, 3 },
-                    new List<int>() { 1, 2, 4, 3, 5 },
-                    new List<int>() { 1, 2, 4, 3, 5 },
-                    new List<int>() { 1, 2, 2, 3, 5 }, // This errors as the first 2 is a starting point and has two connections
-                    new List<int>() { 1, 1, 4, 5, 5 },
-            };
-
-        List<List<int>> _testBoard4 = new List<List<int>>()
-            {
-                    new List<int>() { 1, 2, 2, 3, 3 },
-                    new List<int>() { 1, 2, 4, 3, 5 },
-                    new List<int>() { 1, 2, 4, 3, 5 },
-                    new List<int>() { 1, 2, 3, 3, 5 },
-                    new List<int>() { 1, 1, 4, 5, 5 }, // This errors as 4 is a starting point and doesn't have anything connected to it
-            };
-
-        List<List<int>> _testBoard5 = new List<List<int>>()
-            {
-                    new List<int>() { 1, 4, 2, 2, 3 }, // This should error midway check due to 4 not being a starter and having 1 adjacent value OR 3 being a starter and not having an adjacent value
-                    new List<int>() { 1, 4, 4, 2, 5 },
-                    new List<int>() { 1, 2, 2, 3, 3 },
-                    new List<int>() { 2, 2, 2, 3, 0 },
-                    new List<int>() { 0, 1, 4, 5, 0 },
-            };
-
-        List<List<int>> _testBoard6 = new List<List<int>>()
-            {
-                    new List<int>() { 1, 1, 2, 2, 3 }, // This should error midway check due to 4 not being a starter and having 1 adjacent value OR 3 being a starter and not having an adjacent value
-                    new List<int>() { 1, 0, 4, 0, 5 },
+                    new List<int>() { 1, 2, 0, 0, 0 },
                     new List<int>() { 0, 0, 0, 0, 0 },
-                    new List<int>() { 0, 2, 0, 3, 0 },
-                    new List<int>() { 0, 1, 4, 5, 0 },
+                    new List<int>() { 0, 0, 0, 0, 0 },
             };
 
-        List<List<int>> _testBoard7 = new List<List<int>>()
+        List<List<int>> _testBoard3 = new List<List<int>>() // Fails midway check due to (2,0)
+            {
+                    new List<int>() { 1, 2, 2, 3, 3 },
+                    new List<int>() { 1, 1, 4, 3, 5 },
+                    new List<int>() { 1, 2, 0, 0, 0 },
+                    new List<int>() { 0, 0, 0, 0, 0 },
+                    new List<int>() { 0, 0, 0, 0, 0 },
+            };
+
+        List<List<int>> _testBoard4 = new List<List<int>>() // Fails final check due to (4,0)
             {
                     new List<int>() { 1, 2, 2, 3, 3 },
                     new List<int>() { 1, 2, 4, 3, 5 },
                     new List<int>() { 1, 4, 4, 5, 5 },
                     new List<int>() { 1, 2, 2, 3, 3 },
-                    new List<int>() { 1, 1, 4, 5, 3 },
+                    new List<int>() { 0, 1, 4, 5, 0 },
             };
 
         [TestMethod]
-        public void DoubleCheckReturnsTrueIfNoErrorsFound()
+        public void MidwayCheckReturnsTrueIfNoErrorsFound()
         {
-            _maxColor = _startBoard.Max(row => row.Max());
-            SolveBoard solver = new SolveBoard(_maxColor, _startBoard);
-            bool actual = solver.DoubleCheckBoardIsValid(_answerBoard);
+            bool actual = _solver.MidwayCheck(_testBoard2);
 
             Assert.IsTrue(actual);
         }
 
         [TestMethod]
-        public void DoubleCheckReturnsFalseIfErrorFound()
+        public void MidwayCheckReturnsFalseIfErrorsFound()
         {
-            _maxColor = _startBoard.Max(row => row.Max());
+            bool actual = _solver.MidwayCheck(_testBoard3);
 
-            SolveBoard solver1 = new SolveBoard(_maxColor, _startBoard);
-            bool actual1 = solver1.DoubleCheckBoardIsValid(_testBoard1);
+            Assert.IsFalse(actual);
+        }
 
-            SolveBoard solver2 = new SolveBoard(_maxColor, _startBoard);
-            bool actual2 = solver2.DoubleCheckBoardIsValid(_testBoard2);
+        [TestMethod]
+        public void FinalCheckReturnsTrueIfNoErrorsFound()
+        {
+            bool actual = _solver.FinalCheck(_answerBoard);
 
-            SolveBoard solver3 = new SolveBoard(_maxColor, _startBoard);
-            bool actual7 = solver3.DoubleCheckBoardIsValid(_testBoard7);
+            Assert.IsTrue(actual);
+        }
+
+        [TestMethod]
+        public void FinalCheckReturnsFalseIfErrorsFound()
+        {
+            bool actual1 = _solver.FinalCheck(_testBoard1);
+            bool actual2 = _solver.FinalCheck(_testBoard4);
 
             Assert.IsFalse(actual1);
             Assert.IsFalse(actual2);
-            Assert.IsFalse(actual7);
         }
     }
 }

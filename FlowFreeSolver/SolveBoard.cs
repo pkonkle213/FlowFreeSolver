@@ -17,7 +17,7 @@ namespace FlowFreeSolver
             _startBoard = startBoard;
         }
 
-        public bool isBoardSolved(List<List<int>> board)
+        public bool IsBoardSolved(List<List<int>> board)
         {
             for (int row = 0; row < board.Count; row++)
             {
@@ -39,7 +39,7 @@ namespace FlowFreeSolver
                                     return false;
                                 }
 
-                                if (isBoardSolved(board))
+                                if (IsBoardSolved(board))
                                 {
                                     return true;
                                 }
@@ -53,15 +53,15 @@ namespace FlowFreeSolver
                 }
             }
 
-            return true;
+            return FinalCheck(board);
         }
 
-        public bool IsValidPlacement(List<List<int>> board, int colorTry, int row, int column) // See later comment, may need to be in this validation
+        public bool IsValidPlacement(List<List<int>> board, int colorTry, int row, int column)
         {
             return (MatchingAdjacentTiles(board, colorTry, row, column) > 0 && MatchingAdjacentTiles(board, colorTry, row, column) < 3);
         }
 
-        public int MatchingAdjacentTiles(List<List<int>> board, int color, int row, int column) // Needs to also be used to find adjacent 0s. R0:12233, R1:11435 should error
+        public int MatchingAdjacentTiles(List<List<int>> board, int color, int row, int column)
         {
             int correct = 0;
 
@@ -150,35 +150,56 @@ namespace FlowFreeSolver
 
         public bool DoubleCheckBoardIsValid(List<List<int>> board)
         {
+            if (board.Min(row => row.Min()) > 0)
+            {
+                return FinalCheck(board);
+            }
+
+            return MidwayCheck(board);
+        }
+
+        public bool FinalCheck(List<List<int>> board)
+        {
+            for (int row = 0; row < board.Count; row++)
+            {
+                for (int column = 0; column < board[row].Count; column++)
+                {
+                    if (board[row][column] == 0)
+                    {
+                        return false;
+                    }
+
+                    if (board[row][column] == _startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) != 1)
+                    {
+                        return false;
+                    }
+
+                    if (board[row][column] != _startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) != 2)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        public bool MidwayCheck(List<List<int>> board)
+        {
             for (int row = 0; row < board.Count; row++)
             {
                 for (int column = 0; column < board[row].Count; column++)
                 {
                     if (board[row][column] > 0)
                     {
-                        if (board.Min(row => row.Min()) > 0)
+                        if (board[row][column] == _startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) > 1)
                         {
-                            if (board[row][column] == _startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) != 1)
-                            {
-                                return false;
-                            }
-
-                            if (board[row][column] != _startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) != 2)
-                            {
-                                return false;
-                            }
+                            return false;
                         }
-                        else
-                        {
-                            if (board[row][column] == _startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) > 1)
-                            {
-                                return false;
-                            }
 
-                            if (MatchingAdjacentTiles(board, board[row][column], row, column) > 2)
-                            {
-                                return false;
-                            }
+                        if (MatchingAdjacentTiles(board, board[row][column], row, column) > 2)
+                        {
+                            return false;
                         }
                     }
                 }

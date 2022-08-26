@@ -68,19 +68,19 @@ namespace FlowFreeSolverTests.SolveBoardTests
             int maxColor1 = _boards.board1.Max(row => row.Max());
             SolveBoard solver1 = new SolveBoard(maxColor1, _boards.board1);
             List<List<int>> cloneBoard1 = Program.CopyBoard(_boards.board1);
-            bool actual1 = solver1.isBoardSolved(cloneBoard1);
+            bool actual1 = solver1.IsBoardSolved(cloneBoard1);
             Assert.IsTrue(actual1);
 
             int maxColor2 = _boards.board2.Max(row => row.Max());
             SolveBoard solver2 = new SolveBoard(maxColor2, _boards.board2);
             List<List<int>> cloneBoard2 = Program.CopyBoard(_boards.board2);
-            bool actual2 = solver2.isBoardSolved(cloneBoard2);
+            bool actual2 = solver2.IsBoardSolved(cloneBoard2);
             Assert.IsTrue(actual2);
 
             int maxColor3 = _boards.board3.Max(row => row.Max());
             SolveBoard solver3 = new SolveBoard(maxColor3, _boards.board3);
             List<List<int>> cloneBoard3 = Program.CopyBoard(_boards.board3);
-            bool actual3 = solver3.isBoardSolved(cloneBoard3);
+            bool actual3 = solver3.IsBoardSolved(cloneBoard3);
             Assert.IsTrue(actual3);
         }
     }
