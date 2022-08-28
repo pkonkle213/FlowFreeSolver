@@ -225,9 +225,7 @@ namespace FlowFreeSolver
                 Console.Write("-");
             }
 
-            Console.WriteLine(_attempts);
-
-            //Console.WriteLine();
+            Console.WriteLine();
         }
     }
 }
