@@ -8,7 +8,7 @@ namespace FlowFreeSolver
     public class Program
     {
         private static PreMadeBoards _preMadeBoards = new PreMadeBoards();
-        private static List<List<int>> _startBoard = _preMadeBoards.board2;
+        private static List<List<int>> _startBoard = _preMadeBoards.board1;
 
         private static int _maxColor;
 
