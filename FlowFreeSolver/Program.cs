@@ -8,7 +8,7 @@ namespace FlowFreeSolver
     public class Program
     {
         private static PreMadeBoards _preMadeBoards = new PreMadeBoards();
-        private static List<List<int>> _startBoard = _preMadeBoards.board1;
+        private static List<List<int>> _startBoard = _preMadeBoards.boardHard;
 
         private static int _maxColor;
 
@@ -52,11 +52,13 @@ namespace FlowFreeSolver
 
         public static void PrintBoard(List<List<int>> board)
         {
+            int padding = 2;
+
             for (int row = 0; row < board.Count; row++)
             {
                 for (int column = 0; column < board[0].Count; column++)
                 {
-                    Console.Write(board[row][column]);
+                    Console.Write(board[row][column].ToString().PadLeft(padding));
                 }
 
                 Console.WriteLine();

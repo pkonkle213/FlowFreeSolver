@@ -77,11 +77,13 @@ namespace FlowFreeSolverTests.SolveBoardTests
             bool actual2 = solver2.IsBoardSolved(cloneBoard2);
             Assert.IsTrue(actual2);
 
+            /*
             int maxColor3 = _boards.board3.Max(row => row.Max());
             SolveBoard solver3 = new SolveBoard(maxColor3, _boards.board3);
             List<List<int>> cloneBoard3 = Program.CopyBoard(_boards.board3);
             bool actual3 = solver3.IsBoardSolved(cloneBoard3);
             Assert.IsTrue(actual3);
+            */
         }
     }
 }
