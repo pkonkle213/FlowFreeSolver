@@ -1,4 +1,5 @@
 ﻿using FlowFreeSolver;
+using FlowFreeSolver.FileWriter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,14 @@ namespace FlowFreeSolver
     {
         private static PreMadeBoards _preMadeBoards = new PreMadeBoards();
         private static List<List<int>> _startBoard = _preMadeBoards.boardHard;
+        private static FileAccess fileWriter = new FileAccess();
 
         private static int _maxColor;
 
         static void Main()
         {
             NewBoard _makeBoard = new NewBoard();
+            fileWriter.ClearLog();
 
             //List<List<int>> startBoard = _makeBoard.MakeNewBoard();
             List<List<int>> newBoard = CopyBoard(_startBoard);
@@ -52,7 +55,9 @@ namespace FlowFreeSolver
 
         public static void PrintBoard(List<List<int>> board)
         {
-            int padding = 2;
+            int maxNumber = board.Max(row => row.Max());
+            double logThing = Math.Log(maxNumber);
+            int padding = Convert.ToInt32(Math.Floor(logThing)) + 1;
 
             for (int row = 0; row < board.Count; row++)
             {

@@ -8,7 +8,7 @@ namespace FlowFreeSolverTests.SolveBoardTests
     [TestClass]
     public class CheckTests
     {
-        private static int _maxColor;
+        private static int _maxColor=5;
         SolveBoard _solver = new SolveBoard(_maxColor, _startBoard);
 
         static List<List<int>> _startBoard = new List<List<int>>()

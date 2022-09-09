@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlowFreeSolver.FileWriter;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -7,6 +8,7 @@ namespace FlowFreeSolver
 {
     public class SolveBoard
     {
+        private FileAccess fileWriter = new FileAccess();
         private int _maxColor;
         private List<List<int>> _startBoard;
         private int _attempts;
@@ -23,17 +25,13 @@ namespace FlowFreeSolver
             {
                 for (int column = 0; column < board[0].Count; column++)
                 {
-                    if (row == 3 && column == 3)
-                    {
-                        Console.WriteLine();
-                    }
                     if (board[row][column] == 0)
                     {
                         for (int colorTry = 1; colorTry <= _maxColor; colorTry++)
                         {
                             if (IsValidPlacement(board, colorTry, row, column))
                             {
-                                PrintBoard(board);
+                                LogBoard(board);
 
                                 if (IsBoardSolved(board))
                                 {
@@ -42,7 +40,7 @@ namespace FlowFreeSolver
 
                                 board[row][column] = 0;
 
-                                PrintBoard(board);
+                                LogBoard(board);
                             }
                         }
 
@@ -296,6 +294,11 @@ namespace FlowFreeSolver
                             }
                         }
 
+                        if (NeighboringColors(board, row, column).Max() != 0 && NeighboringColors(board, row, column).Contains(board[row][column]))
+                        {
+                            return false;
+                        }
+
                         if (board[row][column] == _startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) > 1)
                         {
                             return false;
@@ -312,17 +315,75 @@ namespace FlowFreeSolver
             return true;
         }
 
+        private List<int> NeighboringColors(List<List<int>> board, int row, int column)
+        {
+            List<int> result = new List<int>()
+            {
+                ColorInBoxAbove(board,row,column),
+                ColorInBoxRight(board,row,column),
+                ColorInBoxBelow(board,row,column),
+                ColorInBoxLeft(board,row,column)
+            };
+
+            return result;
+        }
+
+        private int ColorInBoxAbove(List<List<int>> board, int row, int column)
+        {
+            if (row == 0)
+            {
+                return 0;
+            }
+
+            return board[row - 1][column];
+        }
+
+        private int ColorInBoxRight(List<List<int>> board, int row, int column)
+        {
+            if (column == board[0].Count)
+            {
+                return 0;
+            }
+
+            return board[row][column + 1];
+        }
+
+        private int ColorInBoxBelow(List<List<int>> board, int row, int column)
+        {
+            if (row == board.Count)
+            {
+                return 0;
+            }
+
+            return board[row + 1][column];
+        }
+
+        private int ColorInBoxLeft(List<List<int>> board, int row, int column)
+        {
+            if (column == 0)
+            {
+                return 0;
+            }
+
+            return board[row][column - 1];
+        }
+
         public int NumberNeighboringZeros(List<List<int>> board, int row, int column)
         {
             return MatchingAdjacentTiles(board, 0, row, column);
         }
 
         public void LogBoard(List<List<int>> board)
-        { }
+        {
+            _attempts++;
+            fileWriter.LogBoard(board, _attempts);
+        }
 
         public void PrintBoard(List<List<int>> board)
         {
-            int padding = 2;
+            int maxNumber = board.Max(row => row.Max());
+            double logThing = Math.Log(maxNumber);
+            int padding = Convert.ToInt32(Math.Floor(logThing)) + 1;
 
             for (int row = 0; row < board.Count; row++)
             {
@@ -340,12 +401,6 @@ namespace FlowFreeSolver
             }
 
             Console.WriteLine(_attempts++);
-
-            if (_attempts % 10 == 0)
-            {
-                Thread.Sleep(3600);
-            }
-
         }
     }
 }
