@@ -8,7 +8,6 @@ namespace FlowFreeSolverTests.SolveBoardTests
     [TestClass]
     public class IsBoardSolvedTests
     {
-        private int _maxColor;
         private PreMadeBoards _boards = new PreMadeBoards();
 
         List<List<int>> _startBoard = new List<List<int>>()
@@ -41,49 +40,37 @@ namespace FlowFreeSolverTests.SolveBoardTests
         [TestMethod]
         public void isValidPlacementReturnsTrueForValidPlacement()
         {
-            _maxColor = _startBoard.Max(row => row.Max());
-            SolveBoard solver = new SolveBoard(_maxColor, _startBoard);
+            SolveBoard solver = new SolveBoard(_startBoard);
 
             bool actual1 = solver.IsValidPlacement(_testBoard2, 2, 1, 1);
-            Assert.IsTrue(actual1);
             
+            Assert.IsTrue(actual1);
         }
 
         [TestMethod]
         public void isValidPlacementReturnsFalseForInvalidPlacement()
         {
-            _maxColor = _startBoard.Max(row => row.Max());
-            SolveBoard solver = new SolveBoard(_maxColor, _startBoard);
+            SolveBoard solver = new SolveBoard(_startBoard);
 
             bool actual1 = solver.IsValidPlacement(_testBoard1, 1, 2, 1);
-            bool actual2 = solver.IsValidPlacement(_testBoard1, 1, 2, 4);
-            
             Assert.IsFalse(actual1);
+            
+            bool actual2 = solver.IsValidPlacement(_testBoard1, 1, 2, 4);
             Assert.IsFalse(actual2);
         }
 
         [TestMethod]
         public void isBoardSolvesReturnsTrueForSolvableBoards()
         {
-            int maxColor1 = _boards.board1.Max(row => row.Max());
-            SolveBoard solver1 = new SolveBoard(maxColor1, _boards.board1);
+           SolveBoard solver1 = new SolveBoard(_boards.board1);
             List<List<int>> cloneBoard1 = Program.CopyBoard(_boards.board1);
             bool actual1 = solver1.IsBoardSolved(cloneBoard1);
             Assert.IsTrue(actual1);
 
-            int maxColor2 = _boards.board2.Max(row => row.Max());
-            SolveBoard solver2 = new SolveBoard(maxColor2, _boards.board2);
+            SolveBoard solver2 = new SolveBoard(_boards.board2);
             List<List<int>> cloneBoard2 = Program.CopyBoard(_boards.board2);
             bool actual2 = solver2.IsBoardSolved(cloneBoard2);
             Assert.IsTrue(actual2);
-
-            /*
-            int maxColor3 = _boards.board3.Max(row => row.Max());
-            SolveBoard solver3 = new SolveBoard(maxColor3, _boards.board3);
-            List<List<int>> cloneBoard3 = Program.CopyBoard(_boards.board3);
-            bool actual3 = solver3.IsBoardSolved(cloneBoard3);
-            Assert.IsTrue(actual3);
-            */
         }
     }
 }

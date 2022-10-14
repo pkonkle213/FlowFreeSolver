@@ -13,10 +13,10 @@ namespace FlowFreeSolver
         private List<List<int>> _startBoard;
         private int _attempts;
 
-        public SolveBoard(int maxColor, List<List<int>> startBoard)
+        public SolveBoard(List<List<int>> startBoard)
         {
-            _maxColor = maxColor;
             _startBoard = startBoard;
+            _maxColor = _startBoard.Max(row => row.Max());
         }
 
         public bool IsBoardSolved(List<List<int>> board)
@@ -31,7 +31,7 @@ namespace FlowFreeSolver
                         {
                             if (IsValidPlacement(board, colorTry, row, column))
                             {
-                                LogBoard(board);
+                                PrintBoard(board);
 
                                 if (IsBoardSolved(board))
                                 {
@@ -40,7 +40,7 @@ namespace FlowFreeSolver
 
                                 board[row][column] = 0;
 
-                                LogBoard(board);
+                                PrintBoard(board);
                             }
                         }
 
@@ -62,9 +62,8 @@ namespace FlowFreeSolver
             }
 
             board[row][column] = 0;
-            return (false);
+            return false; 
         }
-
 
         public int MatchingAdjacentTiles(List<List<int>> board, int color, int row, int column)
         {
@@ -294,11 +293,6 @@ namespace FlowFreeSolver
                             }
                         }
 
-                        if (NeighboringColors(board, row, column).Max() != 0 && NeighboringColors(board, row, column).Contains(board[row][column]))
-                        {
-                            return false;
-                        }
-
                         if (board[row][column] == _startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) > 1)
                         {
                             return false;
@@ -317,15 +311,13 @@ namespace FlowFreeSolver
 
         private List<int> NeighboringColors(List<List<int>> board, int row, int column)
         {
-            List<int> result = new List<int>()
+            return new List<int>()
             {
                 ColorInBoxAbove(board,row,column),
                 ColorInBoxRight(board,row,column),
                 ColorInBoxBelow(board,row,column),
                 ColorInBoxLeft(board,row,column)
             };
-
-            return result;
         }
 
         private int ColorInBoxAbove(List<List<int>> board, int row, int column)
@@ -381,9 +373,7 @@ namespace FlowFreeSolver
 
         public void PrintBoard(List<List<int>> board)
         {
-            int maxNumber = board.Max(row => row.Max());
-            double logThing = Math.Log(maxNumber);
-            int padding = Convert.ToInt32(Math.Floor(logThing)) + 1;
+            int padding = Convert.ToInt32(Math.Floor(Math.Log(_maxColor))) + 1;
 
             for (int row = 0; row < board.Count; row++)
             {

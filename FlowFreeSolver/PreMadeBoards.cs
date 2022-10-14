@@ -76,6 +76,56 @@ namespace FlowFreeSolver
             new List<int>() {0,0,0,0,0,0},
         };
 
+        public List<List<int>> board8 = new List<List<int>>() // Solves in 1958975
+        {
+            new List<int>() {2,0,0,0,0,0,0,0,0,0},
+            new List<int>() {10,0,0,10,9,0,0,0,0,0},
+            new List<int>() {0,0,0,5,0,0,0,0,0,0},
+            new List<int>() {0,3,0,3,8,9,0,0,0,0},
+            new List<int>() {0,0,0,0,4,0,0,0,0,0},
+            new List<int>() {0,0,1,0,0,4,0,0,0,0},
+            new List<int>() {0,0,0,1,0,0,0,8,0,0},
+            new List<int>() {0,0,0,6,7,0,0,0,0,0},
+            new List<int>() {0,0,0,5,0,0,2,0,0,0},
+            new List<int>() {7,0,0,0,0,0,0,0,0,6},
+        };
+
+        public List<List<int>> board9 = new List<List<int>>() // Solves in 1958975
+        {
+            new List<int>() {0,0,0,0,0,0,0,0,0,0,1,0,0,11},
+            new List<int>() {0,3,0,0,0,0,0,0,2,0,8,6,0,0},
+            new List<int>() {0,0,0,0,0,0,0,0,5,0,0,0,0,0},
+            new List<int>() {0,0,11,0,0,0,0,0,0,0,0,0,0,0},
+            new List<int>() {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+            new List<int>() {0,0,0,0,0,0,0,0,0,1,0,6,0,0},
+            new List<int>() {0,0,0,0,0,2,5,0,0,0,0,0,0,0},
+            new List<int>() {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+            new List<int>() {0,0,0,0,0,4,0,0,0,0,0,9,0,0},
+            new List<int>() {0,0,0,0,0,0,0,3,0,0,0,0,0,0},
+            new List<int>() {0,0,0,9,0,0,0,0,7,0,0,8,0,0},
+            new List<int>() {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+            new List<int>() {4,0,0,7,0,10,0,0,0,0,0,0,0,0},
+            new List<int>() {0,0,0,0,0,0,0,0,0,0,0,0,0,10},
+        };
+
+        public List<List<int>> board10 = new List<List<int>>()
+        {
+            new List<int>() {0,0,0,0,0,0,0,3,0,0,0},
+            new List<int>() {0,0,0,0,7,2,0,0,0,0,0},
+            new List<int>() {0,0,1,0,0,0,0,0,0,0,0},
+            new List<int>() {0,0,0,0,0,0,0,0,0,0,0},
+            new List<int>() {0,0,0,0,0,5,0,0,0,0,0},
+            new List<int>() {0,0,0,4,0,0,0,7,2,0,0},
+            new List<int>() {0,0,0,0,0,0,0,0,0,0,0},
+            new List<int>() {0,0,0,6,0,0,0,0,0,0,0},
+            new List<int>() {0,0,0,0,0,0,0,0,0,0,0},
+            new List<int>() {0,0,0,0,0,0,0,0,0,0,0},
+            new List<int>() {0,0,0,0,1,8,0,0,8,0,0},
+            new List<int>() {0,0,6,0,0,0,0,0,0,0,4},
+            new List<int>() {0,0,0,0,0,0,0,0,0,0,0},
+            new List<int>() {0,0,0,0,0,0,0,0,0,5,3},
+        };
+
         public List<List<int>> boardHard = new List<List<int>>()
         {
             new List<int>() { 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
