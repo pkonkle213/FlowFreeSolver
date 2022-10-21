@@ -60,7 +60,7 @@ namespace FlowFreeSolverTests.SolveBoardTests
         }
 
         [TestMethod]
-        public void isBoardSolvesReturnsTrueForSolvableBoards()
+        public void isBoardSolvesReturnsTrueForSolveableBoards()
         {
            SolveBoard solver1 = new SolveBoard(_boards.board1);
             List<List<int>> cloneBoard1 = Program.CopyBoard(_boards.board1);

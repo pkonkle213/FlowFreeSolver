@@ -21,33 +21,24 @@ namespace FlowFreeSolver
 
         public bool IsBoardSolved(List<List<int>> board)
         {
-            for (int row = 0; row < board.Count; row++)
-            {
-                for (int column = 0; column < board[0].Count; column++)
+            for (var row = 0; row < board.Count; row++)
+            for (var column = 0; column < board[0].Count; column++)
+                if (board[row][column] == 0)
                 {
-                    if (board[row][column] == 0)
-                    {
-                        for (int colorTry = 1; colorTry <= _maxColor; colorTry++)
+                    for (var colorTry = 1; colorTry <= _maxColor; colorTry++)
+                        if (IsValidPlacement(board, colorTry, row, column))
                         {
-                            if (IsValidPlacement(board, colorTry, row, column))
-                            {
-                                PrintBoard(board);
+                            PrintBoard(board);
 
-                                if (IsBoardSolved(board))
-                                {
-                                    return true;
-                                }
+                            if (IsBoardSolved(board)) return true;
 
-                                board[row][column] = 0;
+                            board[row][column] = 0;
 
-                                PrintBoard(board);
-                            }
+                            PrintBoard(board);
                         }
 
-                        return false;
-                    }
+                    return false;
                 }
-            }
 
             return true;
         }
@@ -56,217 +47,130 @@ namespace FlowFreeSolver
         {
             board[row][column] = colorTry;
 
-            if (DoubleCheckBoardIsValid(board))
-            {
-                return true;
-            }
+            if (DoubleCheckBoardIsValid(board)) return true;
 
             board[row][column] = 0;
-            return false; 
+            return false;
         }
 
         public int MatchingAdjacentTiles(List<List<int>> board, int color, int row, int column)
         {
-            int correct = 0;
-            bool left = IsColorInBoxLeft(board, color, row, column);
-            bool right = IsColorInBoxRight(board, color, row, column);
-            bool above = IsColorInBoxAbove(board, color, row, column);
-            bool below = IsColorInBoxBelow(board, color, row, column);
+            var correct = 0;
+            var left = IsColorInBoxLeft(board, color, row, column);
+            var right = IsColorInBoxRight(board, color, row, column);
+            var above = IsColorInBoxAbove(board, color, row, column);
+            var below = IsColorInBoxBelow(board, color, row, column);
 
-            if (above)
-            {
-                correct++;
-            }
+            if (above) correct++;
 
-            if (right)
-            {
-                correct++;
-            }
+            if (right) correct++;
 
-            if (below)
-            {
-                correct++;
-            }
+            if (below) correct++;
 
-            if (left)
-            {
-                correct++;
-            }
+            if (left) correct++;
 
-            if (above && right && IsColorInBoxNE(board, color, row, column))
-            {
-                correct++;
-            }
+            if (above && right && IsColorInBoxNE(board, color, row, column)) correct++;
 
-            if (below && right && IsColorInBoxSE(board, color, row, column))
-            {
-                correct++;
-            }
+            if (below && right && IsColorInBoxSE(board, color, row, column)) correct++;
 
-            if (below && left && IsColorInBoxSW(board, color, row, column))
-            {
-                correct++;
-            }
+            if (below && left && IsColorInBoxSW(board, color, row, column)) correct++;
 
-            if (above && left && IsColorInBoxNW(board, color, row, column))
-            {
-                correct++;
-            }
+            if (above && left && IsColorInBoxNW(board, color, row, column)) correct++;
 
             return correct;
         }
 
         public bool IsColorInBoxAbove(List<List<int>> board, int color, int row, int column)
         {
-            if (row == 0)
-            {
-                return false;
-            }
+            if (row == 0) return false;
 
-            if (color == board[row - 1][column])
-            {
-                return true;
-            }
+            if (color == board[row - 1][column]) return true;
 
             return false;
         }
 
         public bool IsColorInBoxNE(List<List<int>> board, int color, int row, int column)
         {
-            if (row == 0 || column + 1 == board[row].Count)
-            {
-                return false;
-            }
+            if (row == 0 || column + 1 == board[row].Count) return false;
 
-            if (color == board[row - 1][column + 1])
-            {
-                return true;
-            }
+            if (color == board[row - 1][column + 1]) return true;
 
             return false;
         }
 
         public bool IsColorInBoxRight(List<List<int>> board, int color, int row, int column)
         {
-            if (column + 1 == board[row].Count)
-            {
-                return false;
-            }
+            if (column + 1 == board[row].Count) return false;
 
-            if (color == board[row][column + 1])
-            {
-                return true;
-            }
+            if (color == board[row][column + 1]) return true;
 
             return false;
         }
 
         public bool IsColorInBoxSE(List<List<int>> board, int color, int row, int column)
         {
-            if (row + 1 == board.Count || column + 1 == board[row].Count)
-            {
-                return false;
-            }
+            if (row + 1 == board.Count || column + 1 == board[row].Count) return false;
 
-            if (color == board[row + 1][column + 1])
-            {
-                return true;
-            }
+            if (color == board[row + 1][column + 1]) return true;
 
             return false;
         }
 
         public bool IsColorInBoxBelow(List<List<int>> board, int color, int row, int column)
         {
-            if (row + 1 == board.Count)
-            {
-                return false;
-            }
+            if (row + 1 == board.Count) return false;
 
-            if (color == board[row + 1][column])
-            {
-                return true;
-            }
+            if (color == board[row + 1][column]) return true;
 
             return false;
         }
 
         public bool IsColorInBoxSW(List<List<int>> board, int color, int row, int column)
         {
-            if (row + 1 == board.Count || column == 0)
-            {
-                return false;
-            }
+            if (row + 1 == board.Count || column == 0) return false;
 
-            if (color == board[row + 1][column - 1])
-            {
-                return true;
-            }
+            if (color == board[row + 1][column - 1]) return true;
 
             return false;
         }
 
         public bool IsColorInBoxLeft(List<List<int>> board, int color, int row, int column)
         {
-            if (column == 0)
-            {
-                return false;
-            }
+            if (column == 0) return false;
 
-            if (color == board[row][column - 1])
-            {
-                return true;
-            }
+            if (color == board[row][column - 1]) return true;
 
             return false;
         }
 
         public bool IsColorInBoxNW(List<List<int>> board, int color, int row, int column)
         {
-            if (row == 0 || column == 0)
-            {
-                return false;
-            }
+            if (row == 0 || column == 0) return false;
 
-            if (color == board[row - 1][column - 1])
-            {
-                return true;
-            }
+            if (color == board[row - 1][column - 1]) return true;
 
             return false;
         }
 
         public bool DoubleCheckBoardIsValid(List<List<int>> board)
         {
-            if (board.Min(row => row.Min()) > 0)
-            {
-                return FinalCheck(board);
-            }
+            if (board.Min(row => row.Min()) > 0) return FinalCheck(board);
 
             return MidwayCheck(board);
         }
 
         public bool FinalCheck(List<List<int>> board)
         {
-            for (int row = 0; row < board.Count; row++)
+            for (var row = 0; row < board.Count; row++)
+            for (var column = 0; column < board[row].Count; column++)
             {
-                for (int column = 0; column < board[row].Count; column++)
-                {
-                    if (board[row][column] == 0)
-                    {
-                        return false;
-                    }
+                if (board[row][column] == 0) return false;
 
-                    if (board[row][column] == _startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) != 1)
-                    {
-                        return false;
-                    }
+                if (board[row][column] == _startBoard[row][column] &&
+                    MatchingAdjacentTiles(board, board[row][column], row, column) != 1) return false;
 
-                    if (board[row][column] != _startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) != 2)
-                    {
-                        return false;
-                    }
-                }
+                if (board[row][column] != _startBoard[row][column] &&
+                    MatchingAdjacentTiles(board, board[row][column], row, column) != 2) return false;
             }
 
             return true;
@@ -274,37 +178,24 @@ namespace FlowFreeSolver
 
         public bool MidwayCheck(List<List<int>> board)
         {
-            for (int row = 0; row < board.Count; row++)
-            {
-                for (int column = 0; column < board[row].Count; column++)
+            for (var row = 0; row < board.Count; row++)
+            for (var column = 0; column < board[row].Count; column++)
+                if (board[row][column] > 0)
                 {
-                    if (board[row][column] > 0)
+                    if (NumberNeighboringZeros(board, row, column) == 0)
                     {
-                        if (NumberNeighboringZeros(board, row, column) == 0)
-                        {
-                            if (board[row][column] == _startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) != 1)
-                            {
-                                return false;
-                            }
+                        if (board[row][column] == _startBoard[row][column] &&
+                            MatchingAdjacentTiles(board, board[row][column], row, column) != 1) return false;
 
-                            if (board[row][column] != _startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) != 2)
-                            {
-                                return false;
-                            }
-                        }
-
-                        if (board[row][column] == _startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) > 1)
-                        {
-                            return false;
-                        }
-
-                        if (MatchingAdjacentTiles(board, board[row][column], row, column) > 2)
-                        {
-                            return false;
-                        }
+                        if (board[row][column] != _startBoard[row][column] &&
+                            MatchingAdjacentTiles(board, board[row][column], row, column) != 2) return false;
                     }
+
+                    if (board[row][column] == _startBoard[row][column] &&
+                        MatchingAdjacentTiles(board, board[row][column], row, column) > 1) return false;
+
+                    if (MatchingAdjacentTiles(board, board[row][column], row, column) > 2) return false;
                 }
-            }
 
             return true;
         }
@@ -313,49 +204,37 @@ namespace FlowFreeSolver
         {
             return new List<int>()
             {
-                ColorInBoxAbove(board,row,column),
-                ColorInBoxRight(board,row,column),
-                ColorInBoxBelow(board,row,column),
-                ColorInBoxLeft(board,row,column)
+                ColorInBoxAbove(board, row, column),
+                ColorInBoxRight(board, row, column),
+                ColorInBoxBelow(board, row, column),
+                ColorInBoxLeft(board, row, column)
             };
         }
 
         private int ColorInBoxAbove(List<List<int>> board, int row, int column)
         {
-            if (row == 0)
-            {
-                return 0;
-            }
+            if (row == 0) return 0;
 
             return board[row - 1][column];
         }
 
         private int ColorInBoxRight(List<List<int>> board, int row, int column)
         {
-            if (column == board[0].Count)
-            {
-                return 0;
-            }
+            if (column == board[0].Count) return 0;
 
             return board[row][column + 1];
         }
 
         private int ColorInBoxBelow(List<List<int>> board, int row, int column)
         {
-            if (row == board.Count)
-            {
-                return 0;
-            }
+            if (row == board.Count) return 0;
 
             return board[row + 1][column];
         }
 
         private int ColorInBoxLeft(List<List<int>> board, int row, int column)
         {
-            if (column == 0)
-            {
-                return 0;
-            }
+            if (column == 0) return 0;
 
             return board[row][column - 1];
         }
@@ -373,22 +252,17 @@ namespace FlowFreeSolver
 
         public void PrintBoard(List<List<int>> board)
         {
-            int padding = Convert.ToInt32(Math.Floor(Math.Log(_maxColor))) + 1;
+            var padding = Convert.ToInt32(Math.Floor(Math.Log(_maxColor))) + 1;
 
-            for (int row = 0; row < board.Count; row++)
+            for (var row = 0; row < board.Count; row++)
             {
-                for (int column = 0; column < board[0].Count; column++)
-                {
+                for (var column = 0; column < board[0].Count; column++)
                     Console.Write(board[row][column].ToString().PadLeft(padding));
-                }
 
                 Console.WriteLine();
             }
 
-            for (int column = 0; column < board[0].Count; column++)
-            {
-                Console.Write("-");
-            }
+            for (var column = 0; column < board[0].Count; column++) Console.Write("-");
 
             Console.WriteLine(_attempts++);
         }

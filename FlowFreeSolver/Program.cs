@@ -14,10 +14,10 @@ namespace FlowFreeSolver
 
         static void Main()
         {
-            NewBoard _makeBoard = new NewBoard();
+            NewBoard makeBoard = new NewBoard();
             fileWriter.ClearLog();
 
-            //List<List<int>> startBoard = _makeBoard.MakeNewBoard();
+            //List<List<int>> startBoard = makeBoard.MakeNewBoard();
             List<List<int>> newBoard = CopyBoard(_startBoard);
 
             SolveBoard solver = new SolveBoard(_startBoard);

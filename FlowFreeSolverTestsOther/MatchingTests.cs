@@ -8,8 +8,6 @@ namespace FlowFreeSolverTests.SolveBoardTests
     [TestClass]
     public class MatchingTests
     {
-        private int _maxColor;
-
         List<List<int>> _testBoard = new List<List<int>>()
             {
                 new List<int>() { 1, 1, 1, 1 },
