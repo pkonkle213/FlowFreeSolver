@@ -63,39 +63,5 @@ namespace FlowFreeSolverTests.SolveBoardTests
                     new List<int>() { 1, 2, 2, 3, 3 },
                     new List<int>() { 0, 1, 4, 5, 0 },
             };
-
-        [TestMethod]
-        public void MidwayCheckReturnsTrueIfNoErrorsFound()
-        {
-            bool actual = _solver.MidwayCheck(_testBoard2);
-
-            Assert.IsTrue(actual);
-        }
-
-        [TestMethod]
-        public void MidwayCheckReturnsFalseIfErrorsFound()
-        {
-            bool actual = _solver.MidwayCheck(_testBoard3);
-
-            Assert.IsFalse(actual);
-        }
-
-        [TestMethod]
-        public void FinalCheckReturnsTrueIfNoErrorsFound()
-        {
-            bool actual = _solver.FinalCheck(_answerBoard);
-
-            Assert.IsTrue(actual);
-        }
-
-        [TestMethod]
-        public void FinalCheckReturnsFalseIfErrorsFound()
-        {
-            bool actual1 = _solver.FinalCheck(_testBoard1);
-            bool actual2 = _solver.FinalCheck(_testBoard4);
-
-            Assert.IsFalse(actual1);
-            Assert.IsFalse(actual2);
-        }
     }
 }
