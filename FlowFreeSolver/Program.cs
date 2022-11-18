@@ -8,7 +8,7 @@ namespace FlowFreeSolver
     public class Program
     {
         private static PreMadeBoards _preMadeBoards = new PreMadeBoards();
-        private static List<List<int>> _startBoard = _preMadeBoards.boardLOL;
+        private static List<List<int>> _startBoard = _preMadeBoards.boardCustom;
         private static WriteBoard _writeBoard = new WriteBoard();
 
         static void Main()

@@ -221,6 +221,7 @@ namespace FlowFreeSolver
                 }
             }
 
+            Peek(board);
             return true;
         }
 
