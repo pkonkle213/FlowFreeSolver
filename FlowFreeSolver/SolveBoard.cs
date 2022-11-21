@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlowFreeSolver.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,24 +19,36 @@ namespace FlowFreeSolver
             _maxColor = _startBoard.Max(row => row.Max());
         }
 
+        public Answer SolveThisBoard(List<List<int>> board)
+        {
+            Answer answer = new Answer();
+            if (IsBoardSolved(board))
+            {
+                answer.Board = board;
+                answer.Attempts = _attempts;
+                answer.IsSolvable = true;
+            }
+            else
+            {
+                answer.IsSolvable = false;
+            }
+
+            return answer;
+        }
+
         public bool IsBoardSolved(List<List<int>> board)
         {
             for (var row = 0; row < board.Count; row++)
             {
                 for (var column = 0; column < board[0].Count; column++)
                 {
-                    //if(row ==7 && column == 0)
-                    //{
-                    //    int a = 1;
-                    //}
-
                     if (board[row][column] == 0)
                     {
                         for (var colorTry = 1; colorTry <= _maxColor; colorTry++)
                         {
                             if (IsValidPlacement(board, colorTry, row, column))
                             {
-                                Peek(board); //Uncomment to have the board be printed before it's solved
+                                Peek(board);
 
                                 if (IsBoardSolved(board))
                                 {
@@ -51,6 +64,7 @@ namespace FlowFreeSolver
                 }
             }
 
+            Peek(board);
             return true;
         }
 
