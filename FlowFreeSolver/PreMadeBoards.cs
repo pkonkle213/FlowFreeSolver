@@ -8,23 +8,23 @@ namespace FlowFreeSolver
     {
         public List<List<int>> boardCustom = new List<List<int>>()
         {
-            new List<int>() { 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            new List<int>() { 0, 4, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0 },
-            new List<int>() { 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            new List<int>() { 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0 },
-            new List<int>() { 7, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0 },
-            new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
             new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            new List<int>() { 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            new List<int>() { 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            new List<int>() { 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0 },
-            new List<int>() { 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0 },
-            new List<int>() { 0, 0, 0, 0, 0, 2, 0, 0, 3, 4, 0, 0 },
-            new List<int>() { 8, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0 },
-            new List<int>() { 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            new List<int>() { 11, 0, 0, 11, 10, 0, 0, 0, 0, 0, 0, 9 },
+            new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            new List<int>() { 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0 },
+            new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            new List<int>() { 0, 0, 0, 0, 0, 0, 7, 3, 0, 0, 0, 0 },
+            new List<int>() { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 },
+            new List<int>() { 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0 },
+            new List<int>() { 0, 0, 0, 0, 0, 10, 0, 8, 11, 0, 0, 0 },
+            new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            new List<int>() { 0, 0, 5, 0, 0, 0, 0, 0, 8, 0, 0, 0 },
+            new List<int>() { 0, 0, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0 },
+            new List<int>() { 0, 0, 0, 0, 0, 0, 0, 5, 0, 10, 0, 0 },
+            new List<int>() { 0, 0, 11, 0, 0, 0, 0, 7, 0, 0, 0, 0 },
         };
-        
+
         public List<List<int>> boardJumboRectangle2_150_15x18_11 = new List<List<int>>()
         {
             new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -62,8 +62,8 @@ namespace FlowFreeSolver
             new List<int>() { 0, 4, 0, 0, 0, 0, 0, 0, 0, 5, 2, 0 },
             new List<int>() { 0, 0, 0, 0, 0, 0, 5, 1, 7, 6, 0, 0 },
         };
-        
-        public List<List<int>> boardTower_150_9x15_11= new List<List<int>>()
+
+        public List<List<int>> boardTower_150_9x15_11 = new List<List<int>>()
         {
             new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 1 },
             new List<int>() { 0, 8, 4, 2, 0, 0, 0, 0, 0 },
@@ -81,8 +81,8 @@ namespace FlowFreeSolver
             new List<int>() { 0, 0, 9, 3, 0, 0, 0, 0, 3 },
             new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 1 },
         };
-        
-        public List<List<int>> boardHourglass_137_13x15_9= new List<List<int>>()
+
+        public List<List<int>> boardHourglass_137_13x15_9 = new List<List<int>>()
         {
             new List<int>() { 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0 },
             new List<int>() { 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0 },
@@ -100,7 +100,7 @@ namespace FlowFreeSolver
             new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
             new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5 },
         };
-        
+
         public List<List<int>> boardScattered_142_12x12_8 = new List<List<int>>()
         {
             new List<int>() { 4, 0, 0, 0, 2, 0, 5, 0, 8, 0, 0, 2 },
@@ -116,7 +116,7 @@ namespace FlowFreeSolver
             new List<int>() { 0, -1, 0, 0, 6, 0, 0, 0, 0, 0, 1, 0 },
             new List<int>() { 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0 },
         };
-        
+
         public List<List<int>> boardAmoeba_137_14x18_14 = new List<List<int>>()
         {
             new List<int>() { -1, -1, -1, -1, 0, 0, 6, 0, 0, 0, -1, 3, -1, -1 },
@@ -138,8 +138,8 @@ namespace FlowFreeSolver
             new List<int>() { -1, -1, 0, 7, 13, 0, 0, 0, 0, 0, -1, -1, -1, -1 },
             new List<int>() { -1, -1, -1, -1, 9, 0, -1, 5, 8, 0, -1, -1, -1, -1 },
         };
-        
-        public List<List<int>> boardWorm_133_14x14_12= new List<List<int>>()
+
+        public List<List<int>> boardWorm_133_14x14_12 = new List<List<int>>()
         {
             new List<int>() { 8, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0 },
             new List<int>() { 7, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0 },
