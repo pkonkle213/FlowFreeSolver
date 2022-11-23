@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
+//This has yet to be implemented
+
 namespace FlowFreeSolver
 {
     public class Normalize
@@ -41,7 +43,10 @@ namespace FlowFreeSolver
             {
                 for(int c = 0; c < startBoard[0].Count; c++)
                 {
+                    for (int index = 0; index < colors.Count; index++)
+                    {
 
+                    }
                 }
             }
 

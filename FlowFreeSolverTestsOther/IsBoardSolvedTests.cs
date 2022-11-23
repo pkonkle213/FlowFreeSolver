@@ -1,9 +1,8 @@
-﻿using FlowFreeSolver;
+﻿using System.Collections.Generic;
+using FlowFreeSolver;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace FlowFreeSolverTests.SolveBoardTests
+namespace FlowFreeSolverTests
 {
     [TestClass]
     public class IsBoardSolvedTests
