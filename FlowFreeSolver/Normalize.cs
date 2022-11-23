@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using System.Linq;
 
@@ -12,13 +13,11 @@ namespace FlowFreeSolver
         public List<List<int>> NormalizeBoard(List<List<int>> startBoard)
         {
             int maxColorStart = startBoard.Max(row => row.Max());
-            List<int> colors = new List<int>();
-            List<int> colorsFull = new List<int>();
+            List<int> colors = new List<int>() { 0 };
 
             for (int i = 1; i <= maxColorStart; i++)
             {
-                int quantity = 0;
-                colorsFull.Add(i);
+                bool present = false;
 
                 foreach (List<int> row in startBoard)
                 {
@@ -26,12 +25,12 @@ namespace FlowFreeSolver
                     {
                         if (number == i)
                         {
-                            quantity++;
+                            present = true;
                         }
                     }
                 }
 
-                if (quantity != 0)
+                if (present)
                 {
                     colors.Add(i);
                 }
@@ -41,13 +40,19 @@ namespace FlowFreeSolver
 
             for (int r = 0; r < startBoard.Count; r++)
             {
-                for(int c = 0; c < startBoard[0].Count; c++)
+                List<int> row = new List<int>();
+                for (int c = 0; c < startBoard[0].Count; c++)
                 {
-                    for (int index = 0; index < colors.Count; index++)
+                    foreach (int color in colors)
                     {
-
+                        if (color == startBoard[r][c])
+                        {
+                           row.Add(color);
+                        }
                     }
                 }
+
+                newBoard.Add(row);
             }
 
             return newBoard;
