@@ -43,11 +43,11 @@ namespace FlowFreeSolver
                 List<int> row = new List<int>();
                 for (int c = 0; c < startBoard[0].Count; c++)
                 {
-                    foreach (int color in colors)
+                    for(int i=0;i<colors.Count;i++)
                     {
-                        if (color == startBoard[r][c])
+                        if (colors[i] == startBoard[r][c])
                         {
-                           row.Add(color);
+                           row.Add(i);
                         }
                     }
                 }
