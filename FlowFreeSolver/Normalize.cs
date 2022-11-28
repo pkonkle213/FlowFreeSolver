@@ -10,10 +10,11 @@ namespace FlowFreeSolver
 {
     public class Normalize
     {
+        private List<int> _colors = new List<int>() { 0 };
+
         public List<List<int>> NormalizeBoard(List<List<int>> startBoard)
         {
             int maxColorStart = startBoard.Max(row => row.Max());
-            List<int> colors = new List<int>() { 0 };
 
             for (int i = 1; i <= maxColorStart; i++)
             {
@@ -32,7 +33,7 @@ namespace FlowFreeSolver
 
                 if (present)
                 {
-                    colors.Add(i);
+                    _colors.Add(i);
                 }
             }
 
@@ -43,11 +44,11 @@ namespace FlowFreeSolver
                 List<int> row = new List<int>();
                 for (int c = 0; c < startBoard[0].Count; c++)
                 {
-                    for(int i=0;i<colors.Count;i++)
+                    for (int i = 0; i < _colors.Count; i++)
                     {
-                        if (colors[i] == startBoard[r][c])
+                        if (_colors[i] == startBoard[r][c])
                         {
-                           row.Add(i);
+                            row.Add(i);
                         }
                     }
                 }
@@ -56,6 +57,25 @@ namespace FlowFreeSolver
             }
 
             return newBoard;
+        }
+
+        public List<List<int>> DenomalizeBoard(List<List<int>> endBoard)
+        {
+            List<List<int>> board = new List<List<int>>();
+
+            for (int r = 0; r < endBoard.Count; r++)
+            {
+                List<int> row = new List<int>();
+
+                for (int c = 0; c < endBoard[0].Count; c++)
+                {
+                    row.Add(_colors[endBoard[r][c]]);
+                }
+
+                board.Add(row);
+            }
+
+            return board;
         }
     }
 }

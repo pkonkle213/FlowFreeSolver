@@ -7,7 +7,7 @@ namespace FlowFreeSolverTests
     [TestClass]
     public class MatchingTests
     {
-        List<List<int>> _testBoard = new List<List<int>>()
+        private static List<List<int>> _testBoard = new List<List<int>>()
             {
                 new List<int>() { 1, 1, 1, 1 },
                 new List<int>() { 1, 2, 2, 1 },
@@ -15,15 +15,15 @@ namespace FlowFreeSolverTests
                 new List<int>() { 1, 1, 1, 1 },
             };
 
+        SolveBoard _solver = new SolveBoard(_testBoard);
+
         [TestMethod]
         [DataRow(1, 1, 0)]
         [DataRow(1, 1, 3)]
         [DataRow(1, 3, 3)]
         public void IsColorInBoxAboveReturnsTrueWhenMatching(int colorTry, int row, int column)
         {
-            SolveBoard solver = new SolveBoard(_testBoard);
-
-            bool actual = solver.IsColorInBoxAbove(_testBoard, colorTry, row, column);
+            bool actual = _solver.IsColorInBoxAbove(_testBoard, colorTry, row, column);
 
             Assert.IsTrue(actual);
         }
@@ -33,9 +33,7 @@ namespace FlowFreeSolverTests
         [DataRow(2, 1, 1)]
         public void IsColorInBoxAboveReturnsFalseWhenNotMatching(int colorTry, int row, int column)
         {
-            SolveBoard solver = new SolveBoard(_testBoard);
-
-            bool actual = solver.IsColorInBoxAbove(_testBoard, colorTry, row, column);
+            bool actual = _solver.IsColorInBoxAbove(_testBoard, colorTry, row, column);
 
             Assert.IsFalse(actual);
         }
@@ -45,9 +43,7 @@ namespace FlowFreeSolverTests
         [DataRow(1, 2, 3)]
         public void IsColorInBoxBelowReturnsTrueWhenMatching(int colorTry, int row, int column)
         {
-           SolveBoard solver = new SolveBoard(_testBoard);
-
-            bool actual = solver.IsColorInBoxBelow(_testBoard, colorTry, row, column);
+            bool actual = _solver.IsColorInBoxBelow(_testBoard, colorTry, row, column);
 
             Assert.IsTrue(actual);
         }
@@ -57,9 +53,7 @@ namespace FlowFreeSolverTests
         [DataRow(2, 2, 1)]
         public void IsColorInBoxBelowReturnsFalseWhenNotMatching(int colorTry, int row, int column)
         {
-            SolveBoard solver = new SolveBoard(_testBoard);
-
-            bool actual = solver.IsColorInBoxBelow(_testBoard, colorTry, row, column);
+            bool actual = _solver.IsColorInBoxBelow(_testBoard, colorTry, row, column);
 
             Assert.IsFalse(actual);
         }
@@ -69,9 +63,7 @@ namespace FlowFreeSolverTests
         [DataRow(2, 1, 1)]
         public void IsColorInBoxRightReturnsTrueWhenMatching(int colorTry, int row, int column)
         {
-            SolveBoard solver = new SolveBoard(_testBoard);
-
-            bool actual = solver.IsColorInBoxRight(_testBoard, colorTry, row, column);
+            bool actual = _solver.IsColorInBoxRight(_testBoard, colorTry, row, column);
 
             Assert.IsTrue(actual);
         }
@@ -81,9 +73,7 @@ namespace FlowFreeSolverTests
         [DataRow(1, 2, 0)]
         public void IsColorInBoxRightReturnsFalseWhenNotMatching(int colorTry, int row, int column)
         {
-            SolveBoard solver = new SolveBoard(_testBoard);
-
-            bool actual = solver.IsColorInBoxRight(_testBoard, colorTry, row, column);
+            bool actual = _solver.IsColorInBoxRight(_testBoard, colorTry, row, column);
 
             Assert.IsFalse(actual);
         }
@@ -93,9 +83,7 @@ namespace FlowFreeSolverTests
         [DataRow(2, 1, 2)]
         public void IsColorInBoxLeftReturnsTrueWhenMatching(int colorTry, int row, int column)
         {
-           SolveBoard solver = new SolveBoard(_testBoard);
-
-            bool actual = solver.IsColorInBoxLeft(_testBoard, colorTry, row, column);
+            bool actual = _solver.IsColorInBoxLeft(_testBoard, colorTry, row, column);
 
             Assert.IsTrue(actual);
         }
@@ -105,11 +93,18 @@ namespace FlowFreeSolverTests
         [DataRow(1, 2, 2)]
         public void IsColorInBoxLeftReturnsFalseWhenNotMatching(int colorTry, int row, int column)
         {
-            SolveBoard solver = new SolveBoard(_testBoard);
-
-            bool actual = solver.IsColorInBoxLeft(_testBoard, colorTry, row, column);
+            bool actual = _solver.IsColorInBoxLeft(_testBoard, colorTry, row, column);
 
             Assert.IsFalse(actual);
+        }
+
+        [TestMethod]
+        [DataRow(1,1,1)]
+        public void IsColorNW(int colorTry,int row,int column)
+        {
+            bool actual = _solver.IsColorInBoxNW(_testBoard, colorTry, row, column);
+
+            Assert.IsTrue(actual);
         }
 
         [TestMethod]
@@ -120,9 +115,7 @@ namespace FlowFreeSolverTests
         [DataRow(3, 2, 2, 0)]
         public void TotalMatchingIsAccurate(int colorTry, int row, int column, int expected)
         {
-            SolveBoard solver = new SolveBoard(_testBoard);
-
-            int actual = solver.MatchingAdjacentTiles(_testBoard, colorTry, row, column);
+            int actual = _solver.MatchingAdjacentTiles(_testBoard, colorTry, row, column);
 
             Assert.AreEqual(expected, actual);
         }

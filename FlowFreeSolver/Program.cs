@@ -21,7 +21,8 @@ namespace FlowFreeSolver
 
             if (solver.IsBoardSolved(newBoard))
             {
-                _writeBoard.Peek(newBoard);
+                List<List<int>> completedBoard = _normalize.DenomalizeBoard(newBoard);
+                _writeBoard.Peek(completedBoard);
                 Console.WriteLine("Solved!");
             }
             else

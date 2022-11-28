@@ -72,7 +72,6 @@ namespace FlowFreeSolver
         {
             _attempts++;
             if (_attempts % 1000 == 0)
-            //if (_attempts > 1921000)
             {
                 Console.WriteLine(_attempts);
                 _writeBoard.Peek(board);
@@ -100,93 +99,165 @@ namespace FlowFreeSolver
             var above = IsColorInBoxAbove(board, color, row, column);
             var below = IsColorInBoxBelow(board, color, row, column);
 
-            if (above) correct++;
+            if (above)
+            {
+                correct++; 
+            }
 
-            if (right) correct++;
+            if (right)
+            {
+                correct++;
+            }
 
-            if (below) correct++;
+            if (below)
+            {
+                correct++;
+            }
 
-            if (left) correct++;
+            if (left)
+            {
+                correct++;
+            }
 
-            if (above && right && IsColorInBoxNE(board, color, row, column)) correct++;
+            if (above && right && IsColorInBoxNE(board, color, row, column))
+            {
+                correct++;
+            }
 
-            if (below && right && IsColorInBoxSE(board, color, row, column)) correct++;
+            if (below && right && IsColorInBoxSE(board, color, row, column))
+            {
+                correct++;
+            }
 
-            if (below && left && IsColorInBoxSW(board, color, row, column)) correct++;
+            if (below && left && IsColorInBoxSW(board, color, row, column))
+            {
+                correct++;
+            }
 
-            if (above && left && IsColorInBoxNW(board, color, row, column)) correct++;
+            if (above && left && IsColorInBoxNW(board, color, row, column))
+            { 
+                correct++;
+            }
 
             return correct;
         }
 
         public bool IsColorInBoxAbove(List<List<int>> board, int color, int row, int column)
         {
-            if (row == 0) return false;
+            if (row == 0)
+            {
+                return false;
+            }
 
-            if (color == board[row - 1][column]) return true;
+            if (color == board[row - 1][column])
+            {
+                return true;
+            }
 
             return false;
         }
 
         public bool IsColorInBoxNE(List<List<int>> board, int color, int row, int column)
         {
-            if (row == 0 || column + 1 == board[row].Count) return false;
+            if (row == 0 || column + 1 == board[row].Count)
+            {
+                return false;
+            }
 
-            if (color == board[row - 1][column + 1]) return true;
+            if (color == board[row - 1][column + 1])
+            {
+                return true;
+            }
 
             return false;
         }
 
         public bool IsColorInBoxRight(List<List<int>> board, int color, int row, int column)
         {
-            if (column + 1 == board[row].Count) return false;
+            if (column + 1 == board[row].Count)
+            {
+                return false;
+            }
 
-            if (color == board[row][column + 1]) return true;
+            if (color == board[row][column + 1])
+            {
+                return true;
+            }
 
             return false;
         }
 
         public bool IsColorInBoxSE(List<List<int>> board, int color, int row, int column)
         {
-            if (row + 1 == board.Count || column + 1 == board[row].Count) return false;
+            if (row + 1 == board.Count || column + 1 == board[row].Count)
+            {
+                return false;
+            }
 
-            if (color == board[row + 1][column + 1]) return true;
+            if (color == board[row + 1][column + 1])
+            {
+                return true;
+            }
 
             return false;
         }
 
         public bool IsColorInBoxBelow(List<List<int>> board, int color, int row, int column)
         {
-            if (row + 1 == board.Count) return false;
+            if (row + 1 == board.Count)
+            {
+                return false;
+            }
 
-            if (color == board[row + 1][column]) return true;
+            if (color == board[row + 1][column])
+            {
+                return true;
+            }
 
             return false;
         }
 
         public bool IsColorInBoxSW(List<List<int>> board, int color, int row, int column)
         {
-            if (row + 1 == board.Count || column == 0) return false;
+            if (row + 1 == board.Count || column == 0)
+            {
+                return false;
+            }
 
-            if (color == board[row + 1][column - 1]) return true;
+            if (color == board[row + 1][column - 1])
+            {
+                return true;
+            }
 
             return false;
         }
 
         public bool IsColorInBoxLeft(List<List<int>> board, int color, int row, int column)
         {
-            if (column == 0) return false;
+            if (column == 0)
+            {
+                return false;
+            }
 
-            if (color == board[row][column - 1]) return true;
+            if (color == board[row][column - 1])
+            {
+                return true;
+            }
 
             return false;
         }
 
         public bool IsColorInBoxNW(List<List<int>> board, int color, int row, int column)
         {
-            if (row == 0 || column == 0) return false;
+            if (row == 0 || column == 0)
+            {
+                return false;
+            }
 
-            if (color == board[row - 1][column - 1]) return true;
+            if (color == board[row - 1][column - 1])
+            {
+                return true;
+            }
 
             return false;
         }
@@ -235,7 +306,6 @@ namespace FlowFreeSolver
                 }
             }
 
-            Peek(board);
             return true;
         }
 
