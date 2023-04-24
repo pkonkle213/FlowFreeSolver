@@ -8,21 +8,27 @@ namespace FlowFreeSolver
     {
         public List<List<int>> boardCustom = new List<List<int>>()
         {
-new List<int>() { 0, 0, 0, 11, 0, 0, 0, 0, 7, 0, 8, 4 },
-new List<int>() { 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 4, 0 },
+new List<int>() { 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+new List<int>() { 0, 9, 0, 7, 0, 0, 0, 0, 0, 2, 0, 0 },
+new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 7, 5, 0, 0 },
+new List<int>() { 0, 0, 1, 5, 4, 0, 0, 0, 0, 0, 0, 0 },
+new List<int>() { 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+new List<int>() { 8, 0, 9, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
+new List<int>() { 0, 0, 0, 10, 0, 6, 0, 0, 0, 0, 0, 0 },
+new List<int>() { 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0 },
+new List<int>() { 0, 0, 0, 0, 10, 0, 0, 0, 0, 4, 0, 0 },
 new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0 },
-new List<int>() { 0, 0, 0, 2, 7, 0, 0, 0, 0, 0, 1, 0 },
+new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0 },
 new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-new List<int>() { 0, 0, 0, 0, 9, 1, 0, 0, 0, 0, 0, 0 },
-new List<int>() { 0, 0, 0, 0, 0, 9, 8, 0, 0, 0, 0, 6 },
-new List<int>() { 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0 },
-new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-new List<int>() { 0, 0, 0, 10, 0, 0, 5, 0, 10, 0, 0, 0 },
-new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-new List<int>() { 6, 0, 0, 2, 0, 0, 0, 0, 0, 3, 0, 0 },
-new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+        };
+
+        public List<List<int>> boardClassic_5x5 = new List<List<int>>()
+        {
+            new List<int>() { 1, 0, 0, 0, 4 },
+            new List<int>() { 0, 0, 0, 0, 0 },
+            new List<int>() { 0, 2, 3, 0, 0 },
+            new List<int>() { 0, 0, 1, 0, 0 },
+            new List<int>() { 3, 2, 4, 0, 0 },
         };
 
         public List<List<int>> boardJumboRectangle2_150_15x18_11 = new List<List<int>>()

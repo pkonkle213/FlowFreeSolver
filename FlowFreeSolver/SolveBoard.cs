@@ -1,5 +1,4 @@
-﻿using FlowFreeSolver.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,23 +16,6 @@ namespace FlowFreeSolver
         {
             _startBoard = startBoard;
             _maxColor = _startBoard.Max(row => row.Max());
-        }
-
-        public Answer SolveThisBoard(List<List<int>> board)
-        {
-            Answer answer = new Answer();
-            if (IsBoardSolved(board))
-            {
-                answer.Board = board;
-                answer.Attempts = _attempts;
-                answer.IsSolvable = true;
-            }
-            else
-            {
-                answer.IsSolvable = false;
-            }
-
-            return answer;
         }
 
         public bool IsBoardSolved(List<List<int>> board)
@@ -71,7 +53,7 @@ namespace FlowFreeSolver
         private void Peek(List<List<int>> board)
         {
             _attempts++;
-            if (_attempts % 1000 == 0)
+            if (_attempts % 1.000 == 0)
             {
                 Console.WriteLine(_attempts);
                 _writeBoard.Peek(board);
@@ -272,28 +254,23 @@ namespace FlowFreeSolver
                     {
                         if (NumberNeighboringZeros(board, row, column) == 0)
                         {
-                            if (board[row][column] == _startBoard[row][column] &&
-                                MatchingAdjacentTiles(board, board[row][column], row, column) != 1)
+                            if (board[row][column] == _startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) != 1)
                             {
                                 return false;
                             }
 
-                            if (board[row][column] != _startBoard[row][column] &&
-                                MatchingAdjacentTiles(board, board[row][column], row, column) != 2)
+                            if (board[row][column] != _startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) != 2)
                             {
                                 return false;
                             }
                         }
 
-                        if (board[row][column] != _startBoard[row][column] &&
-                            NumberNeighboringZeros(board, row, column) == 1 &&
-                            MatchingAdjacentTiles(board, board[row][column], row, column) == 0)
+                        if (board[row][column] != _startBoard[row][column] && NumberNeighboringZeros(board, row, column) == 1 && MatchingAdjacentTiles(board, board[row][column], row, column) == 0)
                         {
                             return false;
                         }
 
-                        if (board[row][column] == _startBoard[row][column] &&
-                            MatchingAdjacentTiles(board, board[row][column], row, column) > 1)
+                        if (board[row][column] == _startBoard[row][column] && MatchingAdjacentTiles(board, board[row][column], row, column) > 1)
                         {
                             return false;
                         }

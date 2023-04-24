@@ -42,14 +42,23 @@ namespace FlowFreeSolver
             for (int r = 0; r < startBoard.Count; r++)
             {
                 List<int> row = new List<int>();
+
                 for (int c = 0; c < startBoard[0].Count; c++)
                 {
-                    for (int i = 0; i < _colors.Count; i++)
+                    if (startBoard[r][c] > 0)
                     {
-                        if (_colors[i] == startBoard[r][c])
+
+                        for (int i = 0; i < _colors.Count; i++)
                         {
-                            row.Add(i);
+                            if (_colors[i] == startBoard[r][c])
+                            {
+                                row.Add(i);
+                            }
                         }
+                    }
+                    else
+                    {
+                        row.Add(startBoard[r][c]);
                     }
                 }
 
@@ -66,10 +75,18 @@ namespace FlowFreeSolver
             for (int r = 0; r < endBoard.Count; r++)
             {
                 List<int> row = new List<int>();
-
+                
                 for (int c = 0; c < endBoard[0].Count; c++)
                 {
+                    if(endBoard[r][c] > 0)
+                    {
                     row.Add(_colors[endBoard[r][c]]);
+                    }
+                    else
+                    {
+                        row.Add(endBoard[r][c]);
+                    }
+
                 }
 
                 board.Add(row);

@@ -11,6 +11,12 @@ namespace FlowFreeSolver
         {
             int maxColor = board.Max(row => row.Max());
             int padding = Convert.ToInt32(Math.Floor(Math.Log(maxColor))) + 1;
+            int minValue = board.Min(row => row.Min());
+            
+            if (minValue < 0 && padding < 3)
+            {
+                padding = 3;
+            }
 
             for (int row = 0; row < board.Count; row++)
             {
